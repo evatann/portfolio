@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Portfolio</title>
+  <title>Eva Tan — Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
- 
+
     :root {
       --cream:     #fdf6ec;
       --peach:     #f9dbb7;
@@ -18,9 +18,9 @@
       --text:      #3b2009;
       --muted:     #9a6a3f;
     }
- 
+
     html { scroll-behavior: smooth; }
- 
+
     body {
       font-family: 'DM Sans', sans-serif;
       background-color: var(--cream);
@@ -28,320 +28,248 @@
       min-height: 100vh;
       overflow-x: hidden;
     }
- 
-    /* ── blobs ── */
-    .blob-bg {
-      position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
-    }
-    .blob {
-      position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.35;
-    }
+
+    .blob-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.35; }
     .blob-1 { width: 520px; height: 520px; background: var(--apricot); top: -120px; left: -100px; animation: drift 12s ease-in-out infinite alternate; }
-    .blob-2 { width: 400px; height: 400px; background: var(--peach);   bottom: -80px; right: -80px; animation: drift 15s ease-in-out infinite alternate-reverse; }
+    .blob-2 { width: 400px; height: 400px; background: var(--peach); bottom: -80px; right: -80px; animation: drift 15s ease-in-out infinite alternate-reverse; }
     .blob-3 { width: 260px; height: 260px; background: var(--tangerine); top: 40%; left: 60%; animation: drift 10s ease-in-out infinite alternate; }
- 
+
     @keyframes drift {
-      from { transform: translate(0, 0) scale(1); }
-      to   { transform: translate(30px, 20px) scale(1.08); }
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(30px,20px) scale(1.08); }
     }
- 
-    /* ── nav ── */
+
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
       padding: 22px 48px;
-      background: rgba(253, 246, 236, 0.72);
+      background: rgba(253,246,236,0.72);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(232, 135, 58, 0.15);
+      border-bottom: 1px solid rgba(232,135,58,0.15);
     }
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.25rem;
-      color: var(--rust);
-      letter-spacing: 0.5px;
-    }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--rust); letter-spacing: 0.5px; }
     .nav-links { display: flex; gap: 36px; }
     .nav-links a {
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--muted);
-      letter-spacing: 0.4px;
-      transition: color 0.2s;
-      position: relative;
+      text-decoration: none; font-size: 0.9rem; font-weight: 500;
+      color: var(--muted); letter-spacing: 0.4px; transition: color 0.2s; position: relative;
     }
-    .nav-links a::after {
-      content: '';
-      position: absolute; bottom: -3px; left: 0; width: 0; height: 1.5px;
-      background: var(--tangerine);
-      transition: width 0.3s;
-    }
+    .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1.5px; background: var(--tangerine); transition: width 0.3s; }
     .nav-links a:hover { color: var(--rust); }
     .nav-links a:hover::after { width: 100%; }
     .nav-links a.active { color: var(--tangerine); }
- 
-    /* ── hero ── */
+
     .hero {
       position: relative; z-index: 1;
       min-height: 100vh;
       display: flex; flex-direction: column; justify-content: center;
-      padding: 140px 80px 80px;
-      max-width: 900px;
+      padding: 140px 80px 80px; max-width: 960px;
     }
     .hero-tag {
-      display: inline-block;
-      font-size: 0.78rem; font-weight: 500; letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--rust);
-      background: rgba(232, 135, 58, 0.12);
-      border: 1px solid rgba(232, 135, 58, 0.3);
-      border-radius: 100px;
-      padding: 6px 16px;
-      margin-bottom: 28px;
+      display: inline-block; font-size: 0.78rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--rust); background: rgba(232,135,58,0.12); border: 1px solid rgba(232,135,58,0.3);
+      border-radius: 100px; padding: 6px 16px; margin-bottom: 28px;
       opacity: 0; animation: fadeUp 0.7s 0.2s forwards;
     }
     .hero h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(3rem, 7vw, 5.5rem);
-      line-height: 1.1;
-      color: var(--brown);
-      margin-bottom: 24px;
+      font-size: clamp(3rem,7vw,5.5rem); line-height: 1.1; color: var(--brown); margin-bottom: 24px;
       opacity: 0; animation: fadeUp 0.7s 0.4s forwards;
     }
     .hero h1 em { color: var(--tangerine); font-style: italic; }
     .hero p {
-      font-size: 1.1rem; font-weight: 300; line-height: 1.8;
-      color: var(--muted);
-      max-width: 520px;
-      margin-bottom: 48px;
+      font-size: 1.1rem; font-weight: 300; line-height: 1.8; color: var(--muted); max-width: 540px; margin-bottom: 48px;
       opacity: 0; animation: fadeUp 0.7s 0.6s forwards;
     }
-    .hero-btns {
-      display: flex; gap: 16px; flex-wrap: wrap;
-      opacity: 0; animation: fadeUp 0.7s 0.8s forwards;
-    }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.7s 0.8s forwards; }
     .btn-primary {
-      display: inline-block; text-decoration: none;
-      background: var(--tangerine); color: #fff;
-      font-size: 0.9rem; font-weight: 500; letter-spacing: 0.3px;
-      padding: 14px 32px; border-radius: 100px;
+      display: inline-block; text-decoration: none; background: var(--tangerine); color: #fff;
+      font-size: 0.9rem; font-weight: 500; padding: 14px 32px; border-radius: 100px;
       transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
       box-shadow: 0 4px 20px rgba(232,135,58,0.35);
     }
     .btn-primary:hover { background: var(--rust); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(196,94,26,0.4); }
     .btn-secondary {
-      display: inline-block; text-decoration: none;
-      border: 1.5px solid var(--apricot); color: var(--rust);
-      font-size: 0.9rem; font-weight: 500;
-      padding: 14px 32px; border-radius: 100px;
+      display: inline-block; text-decoration: none; border: 1.5px solid var(--apricot); color: var(--rust);
+      font-size: 0.9rem; font-weight: 500; padding: 14px 32px; border-radius: 100px;
       transition: background 0.2s, transform 0.2s;
     }
     .btn-secondary:hover { background: var(--peach); transform: translateY(-2px); }
- 
-    /* ── scroll indicator ── */
+
     .scroll-hint {
       position: absolute; bottom: 40px; left: 80px;
       display: flex; align-items: center; gap: 12px;
       font-size: 0.78rem; color: var(--muted); letter-spacing: 1px;
       opacity: 0; animation: fadeUp 0.7s 1.2s forwards;
     }
-    .scroll-hint::before {
-      content: '';
-      display: block; width: 40px; height: 1px;
-      background: var(--apricot);
-    }
- 
-    /* ── about section ── */
-    .section {
-      position: relative; z-index: 1;
-      padding: 100px 80px;
-    }
-    .section-label {
-      font-size: 0.75rem; letter-spacing: 2.5px; text-transform: uppercase;
-      color: var(--tangerine); font-weight: 500; margin-bottom: 16px;
-    }
-    .section h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      color: var(--brown);
-      margin-bottom: 24px;
-    }
- 
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: start;
-    }
-    .about-text p {
-      font-size: 1rem; line-height: 1.9; color: var(--muted); margin-bottom: 16px;
-    }
+    .scroll-hint::before { content: ''; display: block; width: 40px; height: 1px; background: var(--apricot); }
+
+    .section { position: relative; z-index: 1; padding: 100px 80px; }
+    .section-label { font-size: 0.75rem; letter-spacing: 2.5px; text-transform: uppercase; color: var(--tangerine); font-weight: 500; margin-bottom: 16px; }
+    .section h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem,4vw,3rem); color: var(--brown); margin-bottom: 28px; }
+
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+    .about-text p { font-size: 1rem; line-height: 1.9; color: var(--muted); margin-bottom: 16px; }
+
     .about-cards { display: flex; flex-direction: column; gap: 16px; }
     .about-card {
-      background: rgba(249, 219, 183, 0.45);
-      border: 1px solid rgba(244, 185, 125, 0.4);
-      border-radius: 16px;
-      padding: 24px 28px;
-      transition: transform 0.2s, box-shadow 0.2s;
+      background: rgba(249,219,183,0.45); border: 1px solid rgba(244,185,125,0.4);
+      border-radius: 16px; padding: 24px 28px; transition: transform 0.2s, box-shadow 0.2s;
     }
     .about-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(232,135,58,0.12); }
     .about-card-icon { font-size: 1.6rem; margin-bottom: 10px; }
     .about-card h3 { font-size: 0.95rem; font-weight: 500; color: var(--brown); margin-bottom: 6px; }
     .about-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
- 
-    /* ── skills ── */
+
     .skills-wrap { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; }
     .skill-pill {
-      background: rgba(232, 135, 58, 0.1);
-      border: 1px solid rgba(232, 135, 58, 0.25);
-      color: var(--rust);
-      font-size: 0.82rem; font-weight: 500;
-      padding: 7px 18px; border-radius: 100px;
-      transition: background 0.2s;
+      background: rgba(232,135,58,0.1); border: 1px solid rgba(232,135,58,0.25);
+      color: var(--rust); font-size: 0.82rem; font-weight: 500;
+      padding: 7px 18px; border-radius: 100px; transition: background 0.2s;
     }
     .skill-pill:hover { background: rgba(232,135,58,0.22); }
- 
-    /* ── contact ── */
-    .contact-section {
+
+    .blog-callout {
       position: relative; z-index: 1;
-      padding: 80px;
-      text-align: center;
+      margin: 0 80px 80px;
+      background: linear-gradient(135deg, rgba(249,219,183,0.55), rgba(244,185,125,0.25));
+      border: 1px solid rgba(244,185,125,0.45);
+      border-radius: 24px; padding: 48px 56px;
+      display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap;
     }
+    .blog-callout-text h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--brown); margin-bottom: 10px; }
+    .blog-callout-text p { font-size: 0.95rem; color: var(--muted); line-height: 1.7; max-width: 440px; }
+    .blog-callout-text p a { color: var(--tangerine); text-decoration: none; border-bottom: 1px solid var(--apricot); }
+
+    .contact-section { position: relative; z-index: 1; padding: 80px; text-align: center; }
     .contact-box {
       background: linear-gradient(135deg, rgba(249,219,183,0.6), rgba(244,185,125,0.3));
-      border: 1px solid rgba(244, 185, 125, 0.5);
-      border-radius: 28px;
-      padding: 72px 48px;
-      max-width: 640px;
-      margin: 0 auto;
+      border: 1px solid rgba(244,185,125,0.5);
+      border-radius: 28px; padding: 72px 48px; max-width: 640px; margin: 0 auto;
     }
-    .contact-box p {
-      font-size: 1rem; color: var(--muted); line-height: 1.8; margin-bottom: 36px;
-    }
+    .contact-box p { font-size: 1rem; color: var(--muted); line-height: 1.8; margin-bottom: 36px; }
     .contact-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
     .contact-link {
-      display: inline-flex; align-items: center; gap: 8px;
-      text-decoration: none;
-      background: #fff; color: var(--rust);
-      font-size: 0.88rem; font-weight: 500;
-      padding: 12px 24px; border-radius: 100px;
-      border: 1px solid var(--peach);
+      display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+      background: #fff; color: var(--rust); font-size: 0.88rem; font-weight: 500;
+      padding: 12px 24px; border-radius: 100px; border: 1px solid var(--peach);
       transition: background 0.2s, transform 0.2s;
     }
     .contact-link:hover { background: var(--peach); transform: translateY(-2px); }
- 
-    /* ── footer ── */
+
     footer {
-      position: relative; z-index: 1;
-      text-align: center; padding: 32px;
-      font-size: 0.8rem; color: var(--muted);
-      border-top: 1px solid rgba(244, 185, 125, 0.25);
+      position: relative; z-index: 1; text-align: center; padding: 32px;
+      font-size: 0.8rem; color: var(--muted); border-top: 1px solid rgba(244,185,125,0.25);
     }
- 
+
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
       to   { opacity: 1; transform: translateY(0); }
     }
- 
-    /* ── responsive ── */
+
     @media (max-width: 768px) {
       nav { padding: 18px 24px; }
       .hero { padding: 120px 24px 60px; }
       .scroll-hint { left: 24px; }
       .section { padding: 60px 24px; }
       .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .blog-callout { margin: 0 24px 60px; padding: 36px 28px; }
       .contact-section { padding: 40px 24px; }
       .contact-box { padding: 48px 28px; }
     }
   </style>
 </head>
 <body>
- 
-  <!-- Background blobs -->
+
   <div class="blob-bg">
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
     <div class="blob blob-3"></div>
   </div>
- 
-  <!-- Nav -->
+
   <nav>
-    <span class="nav-logo">✦ My Portfolio</span>
+    <span class="nav-logo">✦ Eva's Portfolio</span>
     <div class="nav-links">
       <a href="index.html" class="active">Home</a>
       <a href="projects.html">Projects</a>
       <a href="#contact">Contact</a>
     </div>
   </nav>
- 
-  <!-- Hero -->
+
   <section class="hero">
-    <span class="hero-tag">✦ Designer & Developer</span>
-    <h1>Creating things that<br/>feel <em>warm</em> &amp; alive.</h1>
-    <p>Welcome to my little corner of the internet. I craft digital experiences that blend thoughtful design with clean, purposeful code.</p>
+    <span class="hero-tag">✦ National University of Singapore · Biomedical Engineering</span>
+    <h1>Creating things that<br/>turn ideas into <em>impact.</em></h1>
+    <p>Welcome to my little corner of the internet. I'm a biomedical engineering student interested in healthcare technology, innovation, and meaningful problem-solving.</p>
     <div class="hero-btns">
       <a href="projects.html" class="btn-primary">View My Work →</a>
       <a href="#about" class="btn-secondary">About Me</a>
     </div>
     <div class="scroll-hint">Scroll to explore</div>
   </section>
- 
-  <!-- About -->
+
   <section class="section" id="about">
     <p class="section-label">About Me</p>
     <h2>A little about<br/>who I am.</h2>
     <div class="about-grid">
       <div class="about-text">
-        <p>Hi! I'm a designer and developer who loves building things that feel human. I care about the details — the spacing, the colour, the tiny interaction that makes someone smile.</p>
-        <p>My work lives at the intersection of aesthetics and functionality. Whether I'm wireframing a new interface or writing front-end code, I try to bring the same warmth and intention to everything I make.</p>
+        <p>Hi! I'm Eva — a Biomedical Engineering student at NUS with a background spanning life sciences, engineering, and IT. I enjoy exploring how these fields connect to create meaningful solutions.</p>
+        <p>What excites me most about biomedical engineering is its versatility. I'm drawn to the full medtech ecosystem — from clinical innovation and R&D, to manufacturing, quality assurance, and product development. I thrive at the intersection of technology and real-world impact.</p>
+        <p>I believe that passion paired with persistence can turn ambitious ideas into reality.</p>
         <div class="skills-wrap">
-          <span class="skill-pill">Figma</span>
-          <span class="skill-pill">HTML & CSS</span>
-          <span class="skill-pill">JavaScript</span>
-          <span class="skill-pill">React</span>
-          <span class="skill-pill">UI Design</span>
+          <span class="skill-pill">Python</span>
+          <span class="skill-pill">Medical Devices</span>
+          <span class="skill-pill">Biomedical Engineering</span>
+          <span class="skill-pill">SOLIDWORKS</span>
           <span class="skill-pill">Prototyping</span>
-          <span class="skill-pill">Branding</span>
+          <span class="skill-pill">Computer Vision</span>
+          <span class="skill-pill">R&D</span>
+          <span class="skill-pill">Design Control</span>
         </div>
       </div>
       <div class="about-cards">
         <div class="about-card">
-          <div class="about-card-icon">🎨</div>
-          <h3>Design</h3>
-          <p>I create visual identities, UI systems, and product designs that feel cohesive and intentional from every angle.</p>
+          <div class="about-card-icon">🔬</div>
+          <h3>Biomedical Engineering</h3>
+          <p>Exploring the intersection of engineering principles and biological systems to design solutions that genuinely improve healthcare outcomes.</p>
         </div>
         <div class="about-card">
           <div class="about-card-icon">💻</div>
-          <h3>Development</h3>
-          <p>I bring designs to life with clean, readable code. I enjoy building interfaces that are both beautiful and accessible.</p>
+          <h3>Healthcare Technology</h3>
+          <p>Building scalable, meaningful tech — from software tools to medical device projects — with clinical relevance always at the core.</p>
         </div>
         <div class="about-card">
-          <div class="about-card-icon">☀️</div>
-          <h3>Vibe</h3>
-          <p>Warm palettes, cozy typography, and experiences that feel like a cup of tea on a quiet morning.</p>
+          <div class="about-card-icon">🌱</div>
+          <h3>Always Learning</h3>
+          <p>Multidisciplinary by nature. Whether it's a new lab skill, a coding challenge, or a product problem — I'm always keen to grow.</p>
         </div>
       </div>
     </div>
   </section>
- 
-  <!-- Contact -->
+
+  <div class="blog-callout">
+    <div class="blog-callout-text">
+      <h3>✍️ I also write about MedTech.</h3>
+      <p>On my personal blog, I explore medical devices and healthcare technology, breaking down complex ideas into clear, purposeful writing for non-professionals. Read along at <a href="https://etjournals.wordpress.com/" target="_blank">etjournals.wordpress.com →</a></p>
+    </div>
+    <a href="https://etjournals.wordpress.com/" target="_blank" class="btn-primary" style="white-space:nowrap;">Read the Blog →</a>
+  </div>
+
   <section class="contact-section" id="contact">
     <div class="contact-box">
       <p class="section-label">Get In Touch</p>
-      <h2 style="font-family:'Playfair Display',serif; font-size:2.2rem; color:var(--brown); margin-bottom:16px;">Let's work together ✦</h2>
-      <p>I'm always open to new projects, collaborations, or just a friendly hello. Drop me a message anytime!</p>
+      <h2 style="font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--brown);margin-bottom:16px;">Let's connect ✦</h2>
+      <p>I'm always open to new opportunities, collaborations, or a friendly hello. Whether it's a project, a job, or just a chat about medtech — reach out!</p>
       <div class="contact-links">
         <a href="mailto:hello@example.com" class="contact-link">✉️ Email Me</a>
-        <a href="https://github.com" class="contact-link" target="_blank">🐙 GitHub</a>
-        <a href="https://linkedin.com" class="contact-link" target="_blank">💼 LinkedIn</a>
+        <a href="https://linkedin.com/in/eva-tan" class="contact-link" target="_blank">💼 LinkedIn</a>
+        <a href="https://etjournals.wordpress.com/" class="contact-link" target="_blank">✍️ Blog</a>
       </div>
     </div>
   </section>
- 
+
   <footer>
-    <p>Made with ☀️ and a lot of orange — My Portfolio © 2025</p>
+    <p>Made with curiosity and sunshine ☀️</p>
   </footer>
- 
+
 </body>
 </html>
- 
