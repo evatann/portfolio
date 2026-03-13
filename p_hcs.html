@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fish Farm Monitoring and Control System — Eva Tan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:     #fdf6ec;
+      --peach:     #f9dbb7;
+      --apricot:   #f4b97d;
+      --tangerine: #e8873a;
+      --rust:      #c45e1a;
+      --brown:     #5c3310;
+      --text:      #3b2009;
+      --muted:     #9a6a3f;
+
+      --fs-base:        1rem;
+      --fs-sm:          0.9rem;
+      --fs-xs:          0.82rem;
+      --fs-xxs:         0.78rem;
+      --fs-label-ls:    2.5px;
+      --fs-lg:          1.05rem;
+      --fs-nav-logo:    1.25rem;
+      --fs-h-hero:      clamp(2.2rem, 4.5vw, 3.6rem);
+      --fs-h-section:   clamp(2rem, 4vw, 3rem);
+    }
+
+    html { scroll-behavior: smooth; font-size: 20px; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); min-height: 100vh; overflow-x: hidden; }
+
+    .blob-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.28; }
+    .blob-1 { width: 500px; height: 500px; background: var(--apricot); top: -100px; right: -80px; animation: drift 13s ease-in-out infinite alternate; }
+    .blob-2 { width: 340px; height: 340px; background: var(--peach); bottom: 60px; left: -60px; animation: drift 16s ease-in-out infinite alternate-reverse; }
+    @keyframes drift { from { transform: translate(0,0) scale(1); } to { transform: translate(24px,18px) scale(1.07); } }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 22px 48px;
+      background: rgba(253,246,236,0.72); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(232,135,58,0.15);
+    }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: var(--fs-nav-logo); color: var(--rust); letter-spacing: 0.5px; text-decoration: none; display: inline-block; }
+    .nav-links { display: flex; gap: 36px; }
+    .nav-links a { text-decoration: none; font-size: var(--fs-sm); font-weight: 500; color: var(--muted); transition: color 0.2s; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1.5px; background: var(--tangerine); transition: width 0.3s; }
+    .nav-links a:hover { color: var(--rust); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .project-hero {
+      position: relative; z-index: 1;
+      padding: 130px 72px 60px;
+      overflow: hidden;
+    }
+    .hero-bg { position: absolute; inset: 0; background: linear-gradient(135deg,#fde8cc,#f9c07a); opacity: 0.5; }
+    .hero-emoji {
+      position: absolute; right: 72px; bottom: 0;
+      font-size: 11rem; opacity: 0.18; line-height: 1;
+      user-select: none; pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 720px; }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 7px;
+      text-decoration: none; font-size: var(--fs-sm); font-weight: 500; color: var(--rust);
+      margin-bottom: 22px; opacity: 0; animation: fadeUp 0.5s 0.1s forwards;
+    }
+    .back-link:hover { text-decoration: underline; }
+
+    .project-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; opacity: 0; animation: fadeUp 0.5s 0.2s forwards; }
+    .project-tag {
+      font-size: var(--fs-xxs); font-weight: 500; letter-spacing: 0.8px; text-transform: uppercase;
+      color: var(--rust); background: rgba(255,255,255,0.65); border: 1px solid rgba(232,135,58,0.3);
+      padding: 5px 16px; border-radius: 100px;
+    }
+
+    .project-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: var(--fs-h-hero);
+      color: var(--brown); line-height: 1.2;
+      opacity: 0; animation: fadeUp 0.5s 0.3s forwards;
+    }
+    .project-meta {
+      margin-top: 12px; font-size: var(--fs-base); color: var(--muted);
+      opacity: 0; animation: fadeUp 0.5s 0.4s forwards;
+    }
+
+    .project-body {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1fr 300px;
+      gap: 52px; padding: 60px 72px 100px; align-items: start;
+    }
+
+    .section-label {
+      font-size: var(--fs-xxs); letter-spacing: var(--fs-label-ls); text-transform: uppercase;
+      color: var(--tangerine); font-weight: 500; margin-bottom: 18px;
+    }
+
+    .overview p { font-size: var(--fs-lg); line-height: 1.9; color: var(--muted); margin-bottom: 18px; }
+
+    .highlights-section { margin-top: 52px; }
+    .highlight-list {
+      margin-top: 18px;
+      background: rgba(249,219,183,0.4); border: 1px solid rgba(244,185,125,0.3);
+      border-radius: 14px; padding: 18px 22px;
+      display: flex; flex-direction: column;
+    }
+    .highlight-item {
+      display: flex; gap: 14px; align-items: flex-start;
+      font-size: var(--fs-lg); color: var(--muted); line-height: 1.9;
+      padding: 12px 0; border-bottom: 1px solid rgba(244,185,125,0.25);
+    }
+    .highlight-item:first-child { padding-top: 0; }
+    .highlight-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .hi-icon { font-size: var(--fs-base); flex-shrink: 0; margin-top: 4px; color: var(--tangerine); }
+
+    .sidebar { display: flex; flex-direction: column; gap: 20px; position: sticky; top: 100px; }
+    .sidebar-card {
+      background: rgba(255,251,245,0.9); border: 1px solid rgba(244,185,125,0.35);
+      border-radius: 18px; padding: 24px 26px;
+    }
+    .sidebar-card h4 {
+      font-size: var(--fs-xxs); letter-spacing: var(--fs-label-ls); text-transform: uppercase;
+      color: var(--tangerine); font-weight: 500; margin-bottom: 16px;
+    }
+
+    .meta-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(244,185,125,0.2);
+      font-size: var(--fs-sm);
+    }
+    .meta-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .meta-label { color: var(--muted); flex-shrink: 0; }
+    .meta-value { color: var(--brown); font-weight: 500; text-align: right; }
+
+    .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+    .sidebar-tag {
+      font-size: var(--fs-xs); font-weight: 500; color: var(--rust);
+      background: rgba(232,135,58,0.1); border: 1px solid rgba(232,135,58,0.22);
+      padding: 6px 14px; border-radius: 100px;
+    }
+
+    .link-list { display: flex; flex-direction: column; gap: 10px; }
+    .project-link {
+      display: flex; align-items: center; justify-content: space-between;
+      text-decoration: none; padding: 13px 16px;
+      background: rgba(249,219,183,0.35); border: 1px solid rgba(244,185,125,0.3);
+      border-radius: 12px; transition: background 0.2s, transform 0.15s;
+    }
+    .project-link:hover { background: rgba(249,219,183,0.7); transform: translateX(4px); }
+    .link-left { display: flex; align-items: center; gap: 10px; }
+    .link-icon { font-size: 1.2rem; }
+    .link-label { font-size: var(--fs-sm); font-weight: 500; color: var(--brown); }
+    .link-arrow { color: var(--tangerine); font-size: var(--fs-base); }
+
+    footer {
+      position: relative; z-index: 1; text-align: center; padding: 32px;
+      font-size: var(--fs-sm); color: var(--muted); border-top: 1px solid rgba(244,185,125,0.25);
+    }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 900px) {
+      nav { padding: 18px 24px; }
+      .project-hero { padding: 110px 28px 44px; }
+      .hero-emoji { font-size: 7rem; right: 28px; }
+      .project-body { grid-template-columns: 1fr; padding: 40px 28px 60px; gap: 40px; }
+      .sidebar { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <div class="blob-bg"><div class="blob blob-1"></div><div class="blob blob-2"></div></div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">✦ Eva's Portfolio</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </nav>
+
+  <div class="project-hero">
+    <div class="hero-bg"></div>
+    <div class="hero-emoji">🫨</div>
+    <div class="hero-content">
+      <a href="projects.html" class="back-link">← Back to Projects</a>
+      <div class="project-tags">
+        <span class="project-tag">Engineering</span>
+        <span class="project-tag">Innovation</span>
+      </div>
+      <h1>Recognition of Hand Gestures</h1>
+      <p class="project-meta">Apr 2023 – May 2023</p>
+    </div>
+  </div>
+
+  <div class="project-body">
+    <div class="main-col">
+      <div class="overview">
+        <p class="section-label">Overview</p>
+        <p>During my final year at <b>Temasek Polytechnic</b>, I had the privilege of interning at the <b>Kumamoto National Institute of Technology</b>, Department of Control and Information Systems Engineering in Japan under Professor Ohtsuka Hirofumi. I developed the <b>Head Communication System</b>, an assistive technology that uses <b>MediaPipe’s head position recognition</b> to enable individuals with verbal or physical disabilities to communicate effectively.</p>
+        <p>The system was implemented in <b>Python</b> using the <b>OpenCV</b> and <b>MediaPipe</b> libraries. OpenCV facilitated real-time computer vision tasks, while MediaPipe enabled the application of AI and ML techniques to detect head movements and translate them into commands for communication or typing. The project focused on creating a proof-of-concept that enhances inclusivity, accessibility, and independence for users with disabilities.</p>
+        <p>This international internship experience strengthened my <b>Python programming, computer vision, AI/ML implementation, self-directed research, and assistive technology development</b> skills. It also provided global exposure, cross-cultural collaboration experience, and life skills that have contributed to both my personal and professional growth. I was also awarded the <b>JASSO (Japan Student Services Organisation) Scholarship</b> in recognition of my academic commitment and potential.</p>
+    </div>
+
+      <div class="highlights-section">
+        <p class="section-label">Key Highlights</p>
+        <div class="highlight-list">
+          <div class="highlight-item"><span class="hi-icon">➤</span><span><b>Assistive Technology:</b> Developed a head-controlled communication system to support individuals with verbal or physical disabilities.</span></div>
+          <div class="highlight-item"><span class="hi-icon">➤</span><span><b>Python & Libraries:</b> Implemented computer vision using OpenCV and AI/ML capabilities using MediaPipe for real-time head tracking.</span></div>
+          <div class="highlight-item"><span class="hi-icon">➤</span><span><b>International Internship:</b> Completed a final-year internship at Kumamoto National Institute of Technology, gaining global exposure and cross-cultural experience.</span></div>
+          <div class="highlight-item"><span class="hi-icon">➤</span><span><b>Proof-of-Concept Development:</b> Created a functional prototype demonstrating head movement detection for communication and typing commands.</span></div>
+          <div class="highlight-item"><span class="hi-icon">➤</span><span><b>Skills Developed:</b> Strengthened <b>Python programming, computer vision, AI/ML integration, research, and assistive technology design</b>.</span></div>
+          <div class="highlight-item"><span class="hi-icon">➤</span><span><b>Recognition:</b> Awarded the <b>JASSO Scholarship</b> for academic excellence and potential during international internship.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <h4>Project Details</h4>
+        <div class="meta-row"><span class="meta-label">Start Year</span><span class="meta-value">2023</span></div>
+        <div class="meta-row"><span class="meta-label">Context</span><span class="meta-value">Temasek Polytechnic</span></div>
+        <div class="meta-row"><span class="meta-label">Type</span><span class="meta-value">Assistive Technology</span></div>
+      </div>
+      <div class="sidebar-card">
+        <h4>Tags</h4>
+        <div class="tag-cloud">
+          <span class="sidebar-tag">Python</span>
+          <span class="sidebar-tag">OpenCV</span>
+          <span class="sidebar-tag">MediaPipe</span>
+          <span class="sidebar-tag">Computer Vision</span>
+          <span class="sidebar-tag">AI/ML</span>
+          <span class="sidebar-tag">Assistive Technology</span>
+          <span class="sidebar-tag">Prototyping</span>
+          <span class="sidebar-tag">International Internship</span>
+          <span class="sidebar-tag">Inclusive Design</span>
+        </div>
+      </div>
+      <div class="sidebar-card">
+        <h4>Links</h4>
+        <div class="link-list">
+          <a href="#" class="project-link"><div class="link-left"><span class="link-icon">🔗</span><span class="link-label">Live Demo</span></div><span class="link-arrow">→</span></a>
+          <a href="#" class="project-link"><div class="link-left"><span class="link-icon">🐙</span><span class="link-label">GitHub</span></div><span class="link-arrow">→</span></a>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <footer><p>Made with curiosity and sunshine ☀️</p></footer>
+</body>
+</html>
