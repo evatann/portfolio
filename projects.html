@@ -73,41 +73,42 @@
       opacity: 0; animation: fadeUp 0.6s 0.4s forwards;
     }
 
-    /* ── Controls bar ── */
+    /* ── Controls bar: two stacked rows ── */
     .controls-bar {
       position: relative; z-index: 1;
-      padding: 0 80px 48px;
-      display: flex; flex-wrap: wrap; align-items: center; gap: 16px;
+      padding: 0 80px 32px;
+      display: flex; flex-direction: column; gap: 10px;
       opacity: 0; animation: fadeUp 0.6s 0.55s forwards;
     }
 
-    /* filter pills */
-    .filter-group { display: flex; gap: 10px; flex-wrap: wrap; }
-    .filter-btn {
+    /* each row: label + pills */
+    .control-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+    /* small muted label so it doesn't compete with the pills */
+    .control-label {
+      font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--muted); font-weight: 500; white-space: nowrap;
+      width: 42px; flex-shrink: 0; opacity: 0.7;
+    }
+
+    /* shared pill style */
+    .filter-btn, .sort-btn {
       background: none; border: 1.5px solid var(--peach); color: var(--muted);
       font-family: 'DM Sans', sans-serif; font-size: var(--fs-xs); font-weight: 500;
-      padding: 8px 20px; border-radius: 100px; cursor: pointer; transition: all 0.2s;
+      padding: 7px 16px; border-radius: 100px; cursor: pointer; transition: all 0.2s;
+      display: inline-flex; align-items: center; gap: 5px; white-space: nowrap;
     }
-    .filter-btn:hover, .filter-btn.active { background: var(--tangerine); border-color: var(--tangerine); color: #fff; }
+    .filter-btn:hover, .sort-btn:hover { border-color: var(--apricot); color: var(--rust); }
+    .filter-btn.active { background: var(--tangerine); border-color: var(--tangerine); color: #fff; }
+    .sort-btn.active   { background: rgba(232,135,58,0.12); border-color: var(--tangerine); color: var(--rust); }
+    .sort-icon { font-size: 0.7rem; opacity: 0.7; }
 
-    /* divider */
-    .controls-divider { width: 1px; height: 28px; background: rgba(244,185,125,0.45); flex-shrink: 0; }
-
-    /* sort group */
-    .sort-group { display: flex; align-items: center; gap: 8px; }
-    .sort-label {
-      font-size: var(--fs-xxs); letter-spacing: var(--fs-label-ls); text-transform: uppercase;
-      color: var(--tangerine); font-weight: 500; white-space: nowrap;
+    /* ── Separator between controls and grid ── */
+    .controls-separator {
+      position: relative; z-index: 1;
+      margin: 0 80px 40px;
+      border: none; border-top: 1px solid rgba(244,185,125,0.4);
     }
-    .sort-btn {
-      background: none; border: 1.5px solid var(--peach); color: var(--muted);
-      font-family: 'DM Sans', sans-serif; font-size: var(--fs-xs); font-weight: 500;
-      padding: 8px 16px; border-radius: 100px; cursor: pointer; transition: all 0.2s;
-      display: flex; align-items: center; gap: 5px; white-space: nowrap;
-    }
-    .sort-btn:hover { border-color: var(--apricot); color: var(--rust); }
-    .sort-btn.active { background: rgba(232,135,58,0.12); border-color: var(--tangerine); color: var(--rust); }
-    .sort-icon { font-size: 0.75rem; opacity: 0.75; }
 
     /* ── Grid ── */
     .projects-grid {
@@ -168,8 +169,9 @@
     @media (max-width: 768px) {
       nav { padding: 18px 24px; }
       .page-header { padding: 120px 24px 40px; }
-      .controls-bar { padding: 0 24px 36px; gap: 12px; }
-      .controls-divider { display: none; }
+      .controls-bar { padding: 0 24px 28px; }
+      .control-label { width: 38px; }
+      .controls-separator { margin: 0 24px 32px; }
       .projects-grid { padding: 0 24px 60px; grid-template-columns: 1fr; }
     }
   </style>
@@ -179,7 +181,7 @@
   <div class="blob-bg"><div class="blob blob-1"></div><div class="blob blob-2"></div></div>
 
   <nav>
-    <a href="index.html" class="nav-logo">✦ Eva's Portfolio</a>
+    <a href="index.html" class="nav-logo">✦ Eva's Portfolio'</a>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="projects.html" class="active">Projects</a>
@@ -204,9 +206,11 @@
     5. Update emoji, title, description, and card-year display text
     ═══════════════════════════════════════════════════════════
   -->
-
+  <hr class="controls-separator"/>
+  
   <div class="controls-bar">
-    <div class="filter-group">
+    <div class="control-row">
+      <span class="control-label">Filter</span>
       <button class="filter-btn active" data-filter="all">All</button>
       <button class="filter-btn" data-filter="innovation">Innovation</button>
       <button class="filter-btn" data-filter="self">Self-Initiated</button>
@@ -214,16 +218,15 @@
       <button class="filter-btn" data-filter="data">Data Analytics</button>
       <button class="filter-btn" data-filter="robotics">Robotics</button>
     </div>
-
-    <div class="controls-divider"></div>
-
-    <div class="sort-group">
-      <span class="sort-label">Sort</span>
+    <div class="control-row">
+      <span class="control-label">Sort</span>
       <button class="sort-btn active" data-sort="date-desc">Latest first <span class="sort-icon">↓</span></button>
       <button class="sort-btn" data-sort="date-asc">Oldest first <span class="sort-icon">↑</span></button>
       <button class="sort-btn" data-sort="alpha">A → Z <span class="sort-icon">↓</span></button>
     </div>
   </div>
+
+  <hr class="controls-separator"/>
 
   <div class="projects-grid" id="grid">
 
