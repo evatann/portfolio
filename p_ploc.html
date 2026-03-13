@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Parking Lot Occupancy Counter – Digital Logic System</title>
+  <title>Parking Lot Occupancy Counter – Digital Logic System — Eva Tan</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -14,14 +14,13 @@
     }
     html { scroll-behavior: smooth; font-size: 20px; }
     body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); min-height: 100vh; overflow-x: hidden; }
- 
+
     .blob-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
     .blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.28; }
     .blob-1 { width: 500px; height: 500px; background: var(--apricot); top: -100px; right: -80px; animation: drift 13s ease-in-out infinite alternate; }
     .blob-2 { width: 340px; height: 340px; background: var(--peach); bottom: 60px; left: -60px; animation: drift 16s ease-in-out infinite alternate-reverse; }
     @keyframes drift { from { transform: translate(0,0) scale(1); } to { transform: translate(24px,18px) scale(1.07); } }
- 
-    /* ── nav ── */
+
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
@@ -35,8 +34,7 @@
     .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1.5px; background: var(--tangerine); transition: width 0.3s; }
     .nav-links a:hover { color: var(--rust); }
     .nav-links a:hover::after { width: 100%; }
- 
-    /* ── hero ── */
+
     .project-hero {
       position: relative; z-index: 1;
       padding: 130px 72px 60px;
@@ -49,21 +47,21 @@
       user-select: none; pointer-events: none;
     }
     .hero-content { position: relative; z-index: 1; max-width: 720px; }
- 
+
     .back-link {
       display: inline-flex; align-items: center; gap: 7px;
       text-decoration: none; font-size: 0.95rem; font-weight: 500; color: var(--rust);
       margin-bottom: 22px; opacity: 0; animation: fadeUp 0.5s 0.1s forwards;
     }
     .back-link:hover { text-decoration: underline; }
- 
+
     .project-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; opacity: 0; animation: fadeUp 0.5s 0.2s forwards; }
     .project-tag {
       font-size: 0.8rem; font-weight: 500; letter-spacing: 0.8px; text-transform: uppercase;
       color: var(--rust); background: rgba(255,255,255,0.65); border: 1px solid rgba(232,135,58,0.3);
       padding: 5px 16px; border-radius: 100px;
     }
- 
+
     .project-hero h1 {
       font-family: 'Playfair Display', serif;
       font-size: clamp(2.2rem, 4.5vw, 3.6rem);
@@ -74,8 +72,7 @@
       margin-top: 12px; font-size: 1rem; color: var(--muted);
       opacity: 0; animation: fadeUp 0.5s 0.4s forwards;
     }
- 
-    /* ── page body ── */
+
     .project-body {
       position: relative; z-index: 1;
       display: grid;
@@ -84,28 +81,36 @@
       padding: 60px 72px 100px;
       align-items: start;
     }
- 
-    /* ── main col ── */
+
     .section-label {
       font-size: 0.8rem; letter-spacing: 2.5px; text-transform: uppercase;
       color: var(--tangerine); font-weight: 500; margin-bottom: 18px;
     }
- 
+
     .overview p {
       font-size: 1.05rem; line-height: 1.9; color: var(--muted); margin-bottom: 18px;
     }
- 
+
+    /* ── highlights: single bubble ── */
     .highlights-section { margin-top: 52px; }
-    .highlight-list { display: flex; flex-direction: column; gap: 14px; margin-top: 18px; }
-    .highlight-item {
-      display: flex; gap: 16px; align-items: flex-start;
-      background: rgba(249,219,183,0.4); border: 1px solid rgba(244,185,125,0.3);
-      border-radius: 14px; padding: 18px 22px;
-      font-size: 1rem; color: var(--text); line-height: 1.7;
+    .highlight-list {
+      margin-top: 18px;
+      background: rgba(249,219,183,0.4);
+      border: 1px solid rgba(244,185,125,0.3);
+      border-radius: 14px;
+      padding: 18px 22px;
+      display: flex; flex-direction: column; gap: 0;
     }
-    .hi-icon { font-size: 1.25rem; flex-shrink: 0; margin-top: 2px; }
- 
-    /* ── sidebar ── */
+    .highlight-item {
+      display: flex; gap: 14px; align-items: flex-start;
+      font-size: 1.05rem; color: var(--muted); line-height: 1.9;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(244,185,125,0.25);
+    }
+    .highlight-item:first-child { padding-top: 0; }
+    .highlight-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .hi-icon { font-size: 1rem; flex-shrink: 0; margin-top: 4px; color: var(--tangerine); }
+
     .sidebar { display: flex; flex-direction: column; gap: 20px; position: sticky; top: 100px; }
     .sidebar-card {
       background: rgba(255,251,245,0.9);
@@ -116,7 +121,7 @@
       font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase;
       color: var(--tangerine); font-weight: 500; margin-bottom: 16px;
     }
- 
+
     .meta-row {
       display: flex; justify-content: space-between; align-items: baseline;
       gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(244,185,125,0.2);
@@ -125,14 +130,14 @@
     .meta-row:last-child { border-bottom: none; padding-bottom: 0; }
     .meta-label { color: var(--muted); flex-shrink: 0; }
     .meta-value { color: var(--brown); font-weight: 500; text-align: right; }
- 
+
     .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
     .sidebar-tag {
       font-size: 0.82rem; font-weight: 500; color: var(--rust);
       background: rgba(232,135,58,0.1); border: 1px solid rgba(232,135,58,0.22);
       padding: 6px 14px; border-radius: 100px;
     }
- 
+
     .link-list { display: flex; flex-direction: column; gap: 10px; }
     .project-link {
       display: flex; align-items: center; justify-content: space-between;
@@ -145,14 +150,14 @@
     .link-icon { font-size: 1.2rem; }
     .link-label { font-size: 0.95rem; font-weight: 500; color: var(--brown); }
     .link-arrow { color: var(--tangerine); font-size: 1rem; }
- 
+
     footer {
       position: relative; z-index: 1; text-align: center; padding: 32px;
       font-size: 0.9rem; color: var(--muted); border-top: 1px solid rgba(244,185,125,0.25);
     }
- 
+
     @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
- 
+
     @media (max-width: 900px) {
       nav { padding: 18px 24px; }
       .project-hero { padding: 110px 28px 44px; }
@@ -164,7 +169,7 @@
 </head>
 <body>
   <div class="blob-bg"><div class="blob blob-1"></div><div class="blob blob-2"></div></div>
- 
+
   <nav>
     <a href="index.html" class="nav-logo">✦ Eva's Portfolio</a>
     <div class="nav-links">
@@ -173,7 +178,7 @@
       <a href="index.html#contact">Contact</a>
     </div>
   </nav>
- 
+
   <div class="project-hero">
     <div class="hero-bg"></div>
     <div class="hero-emoji">🏥</div>
@@ -183,12 +188,12 @@
         <span class="project-tag">Engineering</span>
         <span class="project-tag">Hardware</span>
         <span class="project-tag">Breadboard</span>
-    </div>
+      </div>
       <h1>Parking Lot Occupancy Counter – Digital Logic System</h1>
       <p class="project-meta">Nov 2021 – Jan 2022</p>
     </div>
   </div>
- 
+
   <div class="project-body">
     <div class="main-col">
       <div class="overview">
@@ -198,21 +203,21 @@
         <p>The circuit was assembled on a breadboard with proper IC connections, power distribution, and signal routing. I also incorporated a push-button reset interface that allowed users to acknowledge alerts and silence the buzzer. Throughout the development process, I applied concepts such as registers and counter circuits, while debugging the system through systematic troubleshooting and testing multiple scenarios to ensure reliable operation.</p>
         <p>This project strengthened my understanding of <b>digital logic design, counter circuits, and integrated circuit interfacing</b>, while demonstrating how fundamental digital components can be combined to create practical automation solutions.</p>
       </div>
+
       <div class="highlights-section">
         <p class="section-label">Key Highlights</p>
         <div class="highlight-list">
-          <div class="highlight-item"><span class="hi-icon">➤</span><b>Counter Logic Design:</b> Implemented up/down counters using digital ICs to monitor parking occupancy for up to 40 vehicles.</div>
-          <div class="highlight-item"><span class="hi-icon">➤</span><b>Sensor Simulation:</b> Used card reader/slider mechanisms to detect vehicle entry (increment) and exit (decrement), mimicking real gate sensors.</div>
-          <div class="highlight-item"><span class="hi-icon">➤</span><b>Alert System:</b> Designed overflow detection logic that triggers a buzzer when maximum capacity (40 vehicles) is reached.</div>
-          <div class="highlight-item"><span class="hi-icon">➤</span><b>User Control Interface:</b> Incorporated push-button reset functionality to acknowledge alerts and silence the buzzer.</div>
-          <div class="highlight-item"><span class="hi-icon">➤</span><b>Circuit Assembly:</b> Constructed the system on a breadboard, ensuring proper IC connections, stable power distribution, and signal integrity.</div>
-          <div class="highlight-item"><span class="hi-icon">➤</span><b>Practical Application:</b> Applied theoretical knowledge of registers, counters, and digital signal processing to create a working automated system.</div>
-          <div class="highlight-item"><span class="hi-icon">➤</span><b>Debugging & Testing:</b> Performed systematic troubleshooting and tested multiple scenarios to ensure accurate operation and reliability.</div>
+          <div class="highlight-item"><span class="hi-icon">➤</span><span><b>Counter Logic Design:</b> Implemented up/down counters using digital ICs to monitor parking occupancy for up to 40 vehicles.</span></div>
+          <div class="highlight-item"><span class="hi-icon">➤</span><span><b>Sensor Simulation:</b> Used card reader/slider mechanisms to detect vehicle entry (increment) and exit (decrement), mimicking real gate sensors.</span></div>
+          <div class="highlight-item"><span class="hi-icon">➤</span><span><b>Alert System:</b> Designed overflow detection logic that triggers a buzzer when maximum capacity (40 vehicles) is reached.</span></div>
+          <div class="highlight-item"><span class="hi-icon">➤</span><span><b>User Control Interface:</b> Incorporated push-button reset functionality to acknowledge alerts and silence the buzzer.</span></div>
+          <div class="highlight-item"><span class="hi-icon">➤</span><span><b>Circuit Assembly:</b> Constructed the system on a breadboard, ensuring proper IC connections, stable power distribution, and signal integrity.</span></div>
+          <div class="highlight-item"><span class="hi-icon">➤</span><span><b>Practical Application:</b> Applied theoretical knowledge of registers, counters, and digital signal processing to create a working automated system.</span></div>
+          <div class="highlight-item"><span class="hi-icon">➤</span><span><b>Debugging & Testing:</b> Performed systematic troubleshooting and tested multiple scenarios to ensure accurate operation and reliability.</span></div>
         </div>
       </div>
     </div>
 
- 
     <aside class="sidebar">
       <div class="sidebar-card">
         <h4>Project Details</h4>
@@ -223,18 +228,21 @@
       <div class="sidebar-card">
         <h4>Tags</h4>
         <div class="tag-cloud">
-            <span class="sidebar-tag">Digital Logic</span>
-            <span class="sidebar-tag">Integrated Circuits</span>
-            <span class="sidebar-tag">Up/Down Counter</span>
+          <span class="sidebar-tag">Digital Logic</span>
+          <span class="sidebar-tag">Integrated Circuits</span>
+          <span class="sidebar-tag">Up/Down Counter</span>
         </div>
       </div>
       <div class="sidebar-card">
         <h4>Links</h4>
-        <div class="link-list"><a href="#" class="project-link"><div class="link-left"><span class="link-icon">🔗</span><span class="link-label">Live Demo</span></div><span class="link-arrow">→</span></a><a href="#" class="project-link"><div class="link-left"><span class="link-icon">🐙</span><span class="link-label">GitHub</span></div><span class="link-arrow">→</span></a></div>
+        <div class="link-list">
+          <a href="#" class="project-link"><div class="link-left"><span class="link-icon">🔗</span><span class="link-label">Live Demo</span></div><span class="link-arrow">→</span></a>
+          <a href="#" class="project-link"><div class="link-left"><span class="link-icon">🐙</span><span class="link-label">GitHub</span></div><span class="link-arrow">→</span></a>
+        </div>
       </div>
     </aside>
   </div>
- 
+
   <footer><p>Made with curiosity and sunshine ☀️</p></footer>
 </body>
 </html>
