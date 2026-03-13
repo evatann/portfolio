@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Projects — Eva Tan</title>
+  <title>Projects</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -18,16 +18,15 @@
       --text:      #3b2009;
       --muted:     #9a6a3f;
 
-      /* ── Typography scale ── */
-      --fs-base:        1rem;
-      --fs-sm:          0.9rem;
-      --fs-xs:          0.82rem;
-      --fs-xxs:         0.78rem;
-      --fs-label-ls:    2.5px;
-      --fs-lg:          1.05rem;
-      --fs-nav-logo:    1.25rem;
-      --fs-h-hero:      clamp(2.6rem, 6vw, 4.5rem);
-      --fs-h-section:   clamp(2rem, 4vw, 3rem);
+      --fs-base:      1rem;
+      --fs-sm:        0.9rem;
+      --fs-xs:        0.82rem;
+      --fs-xxs:       0.78rem;
+      --fs-label-ls:  2.5px;
+      --fs-lg:        1.05rem;
+      --fs-nav-logo:  1.25rem;
+      --fs-h-hero:    clamp(2.6rem, 6vw, 4.5rem);
+      --fs-h-section: clamp(2rem, 4vw, 3rem);
     }
 
     html { scroll-behavior: smooth; font-size: 20px; }
@@ -47,7 +46,7 @@
       background: rgba(253,246,236,0.72); backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(232,135,58,0.15);
     }
-    .nav-logo { font-family: 'Playfair Display', serif; font-size: var(--fs-nav-logo); color: var(--rust); text-decoration: none; }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: var(--fs-nav-logo); color: var(--rust); letter-spacing: 0.5px; text-decoration: none; display: inline-block; }
     .nav-links { display: flex; gap: 36px; }
     .nav-links a { text-decoration: none; font-size: var(--fs-sm); font-weight: 500; color: var(--muted); transition: color 0.2s; position: relative; }
     .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1.5px; background: var(--tangerine); transition: width 0.3s; }
@@ -74,14 +73,41 @@
       opacity: 0; animation: fadeUp 0.6s 0.4s forwards;
     }
 
-    /* ── Filter bar ── */
-    .filter-bar { position: relative; z-index: 1; padding: 0 80px 48px; display: flex; gap: 10px; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.6s 0.55s forwards; }
+    /* ── Controls bar ── */
+    .controls-bar {
+      position: relative; z-index: 1;
+      padding: 0 80px 48px;
+      display: flex; flex-wrap: wrap; align-items: center; gap: 16px;
+      opacity: 0; animation: fadeUp 0.6s 0.55s forwards;
+    }
+
+    /* filter pills */
+    .filter-group { display: flex; gap: 10px; flex-wrap: wrap; }
     .filter-btn {
       background: none; border: 1.5px solid var(--peach); color: var(--muted);
       font-family: 'DM Sans', sans-serif; font-size: var(--fs-xs); font-weight: 500;
       padding: 8px 20px; border-radius: 100px; cursor: pointer; transition: all 0.2s;
     }
     .filter-btn:hover, .filter-btn.active { background: var(--tangerine); border-color: var(--tangerine); color: #fff; }
+
+    /* divider */
+    .controls-divider { width: 1px; height: 28px; background: rgba(244,185,125,0.45); flex-shrink: 0; }
+
+    /* sort group */
+    .sort-group { display: flex; align-items: center; gap: 8px; }
+    .sort-label {
+      font-size: var(--fs-xxs); letter-spacing: var(--fs-label-ls); text-transform: uppercase;
+      color: var(--tangerine); font-weight: 500; white-space: nowrap;
+    }
+    .sort-btn {
+      background: none; border: 1.5px solid var(--peach); color: var(--muted);
+      font-family: 'DM Sans', sans-serif; font-size: var(--fs-xs); font-weight: 500;
+      padding: 8px 16px; border-radius: 100px; cursor: pointer; transition: all 0.2s;
+      display: flex; align-items: center; gap: 5px; white-space: nowrap;
+    }
+    .sort-btn:hover { border-color: var(--apricot); color: var(--rust); }
+    .sort-btn.active { background: rgba(232,135,58,0.12); border-color: var(--tangerine); color: var(--rust); }
+    .sort-icon { font-size: 0.75rem; opacity: 0.75; }
 
     /* ── Grid ── */
     .projects-grid {
@@ -135,7 +161,6 @@
     .empty-state { display: none; grid-column: 1/-1; text-align: center; padding: 80px 20px; color: var(--muted); }
     .empty-state span { font-size: 2rem; display: block; margin-bottom: 12px; }
 
-    /* ── Footer ── */
     footer { position: relative; z-index: 1; text-align: center; padding: 32px; font-size: var(--fs-sm); color: var(--muted); border-top: 1px solid rgba(244,185,125,0.25); }
 
     @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
@@ -143,7 +168,8 @@
     @media (max-width: 768px) {
       nav { padding: 18px 24px; }
       .page-header { padding: 120px 24px 40px; }
-      .filter-bar { padding: 0 24px 36px; }
+      .controls-bar { padding: 0 24px 36px; gap: 12px; }
+      .controls-divider { display: none; }
       .projects-grid { padding: 0 24px 60px; grid-template-columns: 1fr; }
     }
   </style>
@@ -153,7 +179,7 @@
   <div class="blob-bg"><div class="blob blob-1"></div><div class="blob blob-2"></div></div>
 
   <nav>
-    <a href="index.html" class="nav-logo">✦ Eva Tan</a>
+    <a href="index.html" class="nav-logo">✦ Eva's Portfolio</a>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="projects.html" class="active">Projects</a>
@@ -167,37 +193,58 @@
     <p>A collection of projects, experiments, and lab work — each one a little lesson learned.</p>
   </div>
 
-  <div class="filter-bar">
-    <button class="filter-btn active" data-filter="all">All</button>
-    <button class="filter-btn" data-filter="innovation">Innovation</button>
-    <button class="filter-btn" data-filter="self">Self-Initiated</button>
-    <button class="filter-btn" data-filter="engineering">Engineering</button>
-    <button class="filter-btn" data-filter="data">Data Analytics</button>
-    <button class="filter-btn" data-filter="robotics">Robotics</button>
+  <!--
+    ═══════════════════════════════════════════════════════════
+    HOW TO ADD A NEW PROJECT CARD:
+
+    1. Copy one <a class="project-card"> block below
+    2. Set href to your new page filename
+    3. Set data-tags (innovation / self / engineering / data / robotics)
+    4. Set data-enddate="YYYY-MM" — the end month of the project (drives date sorting)
+    5. Update emoji, title, description, and card-year display text
+    ═══════════════════════════════════════════════════════════
+  -->
+
+  <div class="controls-bar">
+    <div class="filter-group">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="innovation">Innovation</button>
+      <button class="filter-btn" data-filter="self">Self-Initiated</button>
+      <button class="filter-btn" data-filter="engineering">Engineering</button>
+      <button class="filter-btn" data-filter="data">Data Analytics</button>
+      <button class="filter-btn" data-filter="robotics">Robotics</button>
+    </div>
+
+    <div class="controls-divider"></div>
+
+    <div class="sort-group">
+      <span class="sort-label">Sort</span>
+      <button class="sort-btn active" data-sort="date-desc">Latest first <span class="sort-icon">↓</span></button>
+      <button class="sort-btn" data-sort="date-asc">Oldest first <span class="sort-icon">↑</span></button>
+      <button class="sort-btn" data-sort="alpha">A → Z <span class="sort-icon">↓</span></button>
+    </div>
   </div>
 
   <div class="projects-grid" id="grid">
 
-    <a href="p_carpark.html" class="project-card" data-tags="self engineering">
+    <a href="p_carpark.html" class="project-card" data-tags="self engineering" data-enddate="2022-01">
       <div class="card-thumb" style="background: linear-gradient(135deg,#fde8cc,#f9c07a);">
-        <span class="card-thumb-icon">🌐</span>
+        <span class="card-thumb-icon">🅿️</span>
       </div>
       <div class="card-body">
-        <div class="card-tags">
-            <span class="card-tag">Engineering</span>
-        </div>
+        <div class="card-tags"><span class="card-tag">Engineering</span></div>
         <h3>Parking Lot Occupancy Counter – Digital Logic System</h3>
         <p>Built a parking lot occupancy counter with digital logic circuits to track vehicle entry/exit and provide real-time alerts.</p>
         <div class="card-footer">
           <span class="card-cta">View project <span class="card-arrow">→</span></span>
-          <span class="card-year">2022</span>
+          <span class="card-year">Jan 2022</span>
         </div>
       </div>
     </a>
 
-    <a href="p_farm.html" class="project-card" data-tags="innovation">
+    <a href="p_farm.html" class="project-card" data-tags="engineering" data-enddate="2022-08">
       <div class="card-thumb" style="background: linear-gradient(135deg,#fcd5b0,#e8a76a);">
-        <span class="card-thumb-icon">🎨</span>
+        <span class="card-thumb-icon">🐟</span>
       </div>
       <div class="card-body">
         <div class="card-tags">
@@ -208,12 +255,12 @@
         <p>Developed an embedded system using the PIC16F18877 to simulate environmental monitoring and automated feeding for indoor fish farming.</p>
         <div class="card-footer">
           <span class="card-cta">View project <span class="card-arrow">→</span></span>
-          <span class="card-year">2022</span>
+          <span class="card-year">Aug 2022</span>
         </div>
       </div>
     </a>
 
-    <a href="project-p3.html" class="project-card" data-tags="data self">
+    <a href="project-p3.html" class="project-card" data-tags="data self" data-enddate="2024-06">
       <div class="card-thumb" style="background: linear-gradient(135deg,#fae0c5,#f0b06b);">
         <span class="card-thumb-icon">⚡</span>
       </div>
@@ -223,12 +270,12 @@
         <p>A minimal weather app pulling live data from a public API, with dynamic backgrounds.</p>
         <div class="card-footer">
           <span class="card-cta">View project <span class="card-arrow">→</span></span>
-          <span class="card-year">2024</span>
+          <span class="card-year">Jun 2024</span>
         </div>
       </div>
     </a>
 
-    <a href="project-p4.html" class="project-card" data-tags="innovation self">
+    <a href="project-p4.html" class="project-card" data-tags="innovation self" data-enddate="2024-09">
       <div class="card-thumb" style="background: linear-gradient(135deg,#fde4cc,#e8a06a);">
         <span class="card-thumb-icon">✏️</span>
       </div>
@@ -238,12 +285,12 @@
         <p>Full branding package for a small local bakery — logo, colour palette, and packaging mockups.</p>
         <div class="card-footer">
           <span class="card-cta">View project <span class="card-arrow">→</span></span>
-          <span class="card-year">2024</span>
+          <span class="card-year">Sep 2024</span>
         </div>
       </div>
     </a>
 
-    <a href="project-p5.html" class="project-card" data-tags="engineering self">
+    <a href="project-p5.html" class="project-card" data-tags="engineering self" data-enddate="2023-05">
       <div class="card-thumb" style="background: linear-gradient(135deg,#fce8d0,#f4b070);">
         <span class="card-thumb-icon">📝</span>
       </div>
@@ -253,12 +300,12 @@
         <p>A CRUD task management web app with user auth, drag-and-drop reordering, and local storage.</p>
         <div class="card-footer">
           <span class="card-cta">View project <span class="card-arrow">→</span></span>
-          <span class="card-year">2023</span>
+          <span class="card-year">May 2023</span>
         </div>
       </div>
     </a>
 
-    <a href="project-p6.html" class="project-card" data-tags="innovation engineering">
+    <a href="project-p6.html" class="project-card" data-tags="innovation engineering" data-enddate="2023-11">
       <div class="card-thumb" style="background: linear-gradient(135deg,#fae0c8,#eda060);">
         <span class="card-thumb-icon">🌿</span>
       </div>
@@ -268,7 +315,7 @@
         <p>A nature-inspired landing page for a sustainable products brand. Focused on accessibility.</p>
         <div class="card-footer">
           <span class="card-cta">View project <span class="card-arrow">→</span></span>
-          <span class="card-year">2023</span>
+          <span class="card-year">Nov 2023</span>
         </div>
       </div>
     </a>
@@ -281,34 +328,69 @@
   <footer><p>Made with curiosity and sunshine ☀️</p></footer>
 
   <script>
-    const buttons = document.querySelectorAll('.filter-btn');
-    const cards   = document.querySelectorAll('.project-card');
-    const empty   = document.getElementById('emptyState');
-    const grid    = document.getElementById('grid');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const sortBtns   = document.querySelectorAll('.sort-btn');
+    const grid       = document.getElementById('grid');
+    const empty      = document.getElementById('emptyState');
 
-    const cardArray = Array.from(cards);
-    cardArray.sort((a, b) => {
-      const yearA = parseInt(a.querySelector('.card-year')?.textContent) || 0;
-      const yearB = parseInt(b.querySelector('.card-year')?.textContent) || 0;
-      return yearB - yearA;
-    });
-    cardArray.forEach(card => grid.insertBefore(card, empty));
+    let activeFilter = 'all';
+    let activeSort   = 'date-desc';
 
-    buttons.forEach(btn => {
+    // "2022-08" → 202208 (sortable integer)
+    function parseDate(card) {
+      return parseInt((card.dataset.enddate || '0000-00').replace('-', ''), 10);
+    }
+
+    function getTitle(card) {
+      return card.querySelector('h3')?.textContent.trim().toLowerCase() || '';
+    }
+
+    function applyFilterAndSort() {
+      const cards = Array.from(grid.querySelectorAll('.project-card'));
+
+      // 1. filter
+      let visible = 0;
+      cards.forEach(card => {
+        const tags = card.dataset.tags || '';
+        const show = activeFilter === 'all' || tags.includes(activeFilter);
+        card.classList.toggle('hidden', !show);
+        if (show) visible++;
+      });
+      empty.style.display = visible === 0 ? 'block' : 'none';
+
+      // 2. sort visible cards
+      const visibleCards = cards.filter(c => !c.classList.contains('hidden'));
+      visibleCards.sort((a, b) => {
+        if (activeSort === 'date-desc') return parseDate(b) - parseDate(a);
+        if (activeSort === 'date-asc')  return parseDate(a) - parseDate(b);
+        if (activeSort === 'alpha')     return getTitle(a).localeCompare(getTitle(b));
+        return 0;
+      });
+
+      // 3. re-insert in sorted order
+      visibleCards.forEach(card => grid.insertBefore(card, empty));
+    }
+
+    filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        buttons.forEach(b => b.classList.remove('active'));
+        filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        const filter = btn.dataset.filter;
-        let visible = 0;
-        cards.forEach(card => {
-          const tags = card.dataset.tags || '';
-          const show = filter === 'all' || tags.includes(filter);
-          card.classList.toggle('hidden', !show);
-          if (show) visible++;
-        });
-        empty.style.display = visible === 0 ? 'block' : 'none';
+        activeFilter = btn.dataset.filter;
+        applyFilterAndSort();
       });
     });
+
+    sortBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        sortBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeSort = btn.dataset.sort;
+        applyFilterAndSort();
+      });
+    });
+
+    // initial render
+    applyFilterAndSort();
   </script>
 </body>
 </html>
