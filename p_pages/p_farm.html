@@ -178,24 +178,26 @@
   <div class="blob-bg"><div class="blob blob-1"></div><div class="blob blob-2"></div></div>
 
   <nav>
-    <a href="index.html" class="nav-logo">✦ Eva's Portfolio</a>
+    <a href="../index.html" class="nav-logo">✦ Eva's Portfolio</a>
     <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="projects.html">Projects</a>
-      <a href="index.html#contact">Contact</a>
+      <a href="../index.html">Home</a>
+      <a href="../projects.html">Projects</a>
+      <a href="../index.html#contact">Contact</a>
     </div>
   </nav>
 
   <div class="project-hero">
     <div class="hero-bg"></div>
-    <div class="hero-emoji">📸</div>
+    <div class="hero-emoji">🐟</div>
     <div class="hero-content">
-      <a href="projects.html" class="back-link">← Back to Projects</a>
+      <a href="../projects.html" class="back-link">← Back to Projects</a>
       <div class="project-tags">
-        <span class="project-tag">Innovation</span>
+        <span class="project-tag">Engineering</span>
+        <span class="project-tag">Hardware</span>
+        <span class="project-tag">C-Programming</span>
       </div>
-      <h1>cAIreSync</h1>
-      <p class="project-meta">Feb 2025 – Mar 2025</p>
+      <h1>Fish Farm Monitoring and Control System – Embedded Microcontroller Project</h1>
+      <p class="project-meta">Apr 2022 – Aug 2022</p>
     </div>
   </div>
 
@@ -203,18 +205,24 @@
     <div class="main-col">
       <div class="overview">
         <p class="section-label">Overview</p>
-        <p><b>cAIreSync</b> is a team-led project addressing key challenges in eldercare, such as high fall risk, social isolation, and shortage of trained caregivers. The project proposes an <b>AI-powered CCTV monitoring system</b> that detects falls, prolonged immobility, and unusual movements, automatically notifying family members and healthcare professionals for timely intervention.</p>
-        <p>The system integrates <b>advanced image recognition, real-time monitoring, and automated reporting</b> to promote independence among the elderly while reducing caregiver burden. Ethical concerns—including data privacy, reduced human interaction, and accessibility—are addressed through encryption, remote communication features, and tiered subscription models.</p>
-        <p>As part of the project, I also <b>practiced pitching and presenting our solution</b> to stakeholders, refining communication and persuasion skills while demonstrating the value of AI and human-centered design in healthcare. This experience emphasized <b>societal impact considerations, ethical design, and effective teamwork</b> in technology-driven solutions.</p>
+        <p>As part of a project at Temasek Polytechnic, I developed an embedded monitoring and automation system for indoor fish farming operations using the PIC16F18877 microcontroller. The project aimed to automate environmental monitoring and operational processes in aquaculture, supporting more efficient and sustainable fish production aligned with Singapore 30 by 30 Initiative goals.</p>
+        <p>The system monitored key water parameters such as temperature, pH levels, and dissolved oxygen using ADC-based sensor inputs, simulated through trimmer potentiometers. Real-time environmental data was displayed using multiplexed 7-segment displays and an LCD interface. To ensure stable visual output, I implemented Timer1 interrupt-based display refreshing, eliminating flickering commonly seen in delay-based multiplexing systems.</p>
+        <p>Automated control logic was developed to regulate heating, cooling, and oxygen pumps using PWM signals with adjustable duty cycles based on sensor readings. The system also included a Timer3 interrupt-based scheduling module to automate fish feeding at fixed six-hour intervals, supported by LED status indicators.</p>
+        <p>The project was developed using modular embedded C programming, with separate modules for ADC processing, LCD communication, PWM control, and system logic. During system integration, I debugged timer conflicts and resolved stability issues by restructuring the interrupt architecture and optimizing resource allocation across peripherals.</p>
+        <p>This project strengthened my skills in <b>embedded C programming, real-time system design, hardware–software integration, and microcontroller debugging</b>, while demonstrating how embedded technologies can support sustainable and automated solutions in modern aquaculture systems.</p>
       </div>
 
       <div class="highlights-section">
         <p class="section-label">Key Highlights</p>
         <div class="highlight-list">
-          <div class="highlight-item"><span class="hi-icon">➤</span><span><b>Human-Centered Design:</b> Promotes elderly independence while reducing caregiver burden, addressing ethical and accessibility concerns.</span></div>
-          <div class="highlight-item"><span class="hi-icon">➤</span><span><b>Ethical Considerations:</b> Implemented encryption, remote communication, and tiered subscription models to ensure privacy and usability.</span></div>
-          <div class="highlight-item"><span class="hi-icon">➤</span><span><b>Pitching Experience:</b> Practiced presenting and pitching the project to stakeholders, enhancing communication and persuasion skills.</span></div>
-          <div class="highlight-item"><span class="hi-icon">➤</span><span><b>Skills Developed:</b> Strengthened <b>AI integration, human-centered design, ethical tech considerations, teamwork, and pitching skills</b>.</span></div>
+          <div class="highlight-item"><span class="hi-icon">➤</span><span><b>Embedded Systems Design:</b> Developed a real-time environmental monitoring and control system for indoor fish farming using PIC16F18877 microcontroller.</span></div>
+          <div class="highlight-item"><span class="hi-icon">➤</span><span><b>Analog Sensor Integration:</b> Monitored temperature (23–28°C), pH (6–9), and dissolved oxygen (0–10 ppm) with ADC and simulated sensors using trimmer potentiometers.</span></div>
+          <div class="highlight-item"><span class="hi-icon">➤</span><span><b>Real-Time Display:</b> Programmed multiplexed 7-segment displays with Timer1 interrupts to eliminate flickering and LCD displays for status messages and alerts.</span></div>
+          <div class="highlight-item"><span class="hi-icon">➤</span><span><b>Automated Control Logic:</b> Designed PWM-based heating/cooling and oxygen pump systems with variable speed control (50–100% duty cycle) responding to real-time sensor readings.</span></div>
+          <div class="highlight-item"><span class="hi-icon">➤</span><span><b>Scheduled Operations:</b> Implemented Timer3-driven automated feeding every 6 hours with LED indicators.</span></div>
+          <div class="highlight-item"><span class="hi-icon">➤</span><span><b>Modular Programming & Integration:</b> Applied modular coding practices, separating ADC, LCD, PWM, and control logic for maintainability.</span></div>
+          <div class="highlight-item"><span class="hi-icon">➤</span><span><b>Debugging & Optimization:</b> Resolved timer conflicts, prevented oscillator overload, and eliminated display flickering using interrupt-driven techniques.</span></div>
+          <div class="highlight-item"><span class="hi-icon">➤</span><span><b>Practical Impact:</b> Optimized fish production while reducing manual labor, contributing to sustainable food production aligned with Singapore's 30BY30 initiative.</span></div>
         </div>
       </div>
     </div>
@@ -222,20 +230,19 @@
     <aside class="sidebar">
       <div class="sidebar-card">
         <h4>Project Details</h4>
-        <div class="meta-row"><span class="meta-label">Start Year</span><span class="meta-value">2025</span></div>
-        <div class="meta-row"><span class="meta-label">Context</span><span class="meta-value">National University of Singapore</span></div>
-        <div class="meta-row"><span class="meta-label">Type</span><span class="meta-value">Product Pitching</span></div>
+        <div class="meta-row"><span class="meta-label">Start Year</span><span class="meta-value">2022</span></div>
+        <div class="meta-row"><span class="meta-label">Context</span><span class="meta-value">Temasek Polytechnic</span></div>
+        <div class="meta-row"><span class="meta-label">Type</span><span class="meta-value">Embedded Systems</span></div>
       </div>
       <div class="sidebar-card">
         <h4>Tags</h4>
         <div class="tag-cloud">
-          <span class="sidebar-tag">AI</span>
-          <span class="sidebar-tag">Healthcare Technology</span>
-          <span class="sidebar-tag">Eldercare</span>
-          <span class="sidebar-tag">Human-Centered Design</span>
-          <span class="sidebar-tag">Ethical Design</span>
-          <span class="sidebar-tag">Team Project</span>
-          <span class="sidebar-tag">Pitching & Presentation</span>
+          <span class="sidebar-tag">Embedded Systems</span>
+          <span class="sidebar-tag">PIC Microcontroller</span>
+          <span class="sidebar-tag">Embedded C</span>
+          <span class="sidebar-tag">ADC & PWM</span>
+          <span class="sidebar-tag">Real-Time Systems</span>
+          <span class="sidebar-tag">Control Systems</span>
         </div>
       </div>
       <div class="sidebar-card">
