@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Certifications — Eva Tan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:     #fdf6ec;
+      --peach:     #f9dbb7;
+      --apricot:   #f4b97d;
+      --tangerine: #e8873a;
+      --rust:      #c45e1a;
+      --brown:     #5c3310;
+      --text:      #3b2009;
+      --muted:     #9a6a3f;
+
+      --fs-base:      1rem;
+      --fs-sm:        0.9rem;
+      --fs-xs:        0.82rem;
+      --fs-xxs:       0.78rem;
+      --fs-label-ls:  2.5px;
+      --fs-lg:        1.05rem;
+      --fs-nav-logo:  1.25rem;
+      --fs-h-hero:    clamp(2.4rem, 5vw, 4rem);
+    }
+
+    html { scroll-behavior: smooth; font-size: 20px; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--cream);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .blob-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.35; }
+    .blob-1 { width: 520px; height: 520px; background: var(--apricot); top: -120px; left: -100px; animation: drift 12s ease-in-out infinite alternate; }
+    .blob-2 { width: 400px; height: 400px; background: var(--peach); bottom: -80px; right: -80px; animation: drift 15s ease-in-out infinite alternate-reverse; }
+    .blob-3 { width: 260px; height: 260px; background: var(--tangerine); top: 40%; left: 60%; animation: drift 10s ease-in-out infinite alternate; }
+    @keyframes drift {
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(30px,20px) scale(1.08); }
+    }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 22px 48px;
+      background: rgba(253,246,236,0.72);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(232,135,58,0.15);
+    }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: var(--fs-nav-logo); color: var(--rust); letter-spacing: 0.5px; text-decoration: none; }
+    .nav-links { display: flex; gap: 36px; }
+    .nav-links a {
+      text-decoration: none; font-size: var(--fs-sm); font-weight: 500;
+      color: var(--muted); letter-spacing: 0.4px; transition: color 0.2s; position: relative;
+    }
+    .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1.5px; background: var(--tangerine); transition: width 0.3s; }
+    .nav-links a:hover { color: var(--rust); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active { color: var(--tangerine); }
+    .nav-links a.active::after { width: 100%; }
+
+    .page-header {
+      position: relative; z-index: 1;
+      padding: 160px 80px 60px; max-width: 860px;
+      opacity: 0; animation: fadeUp 0.7s 0.2s forwards;
+    }
+    .section-label {
+      font-size: var(--fs-xxs); letter-spacing: var(--fs-label-ls); text-transform: uppercase;
+      color: var(--tangerine); font-weight: 500; margin-bottom: 16px;
+    }
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: var(--fs-h-hero); line-height: 1.15; color: var(--brown); margin-bottom: 18px;
+    }
+    .page-header h1 em { color: var(--tangerine); font-style: italic; }
+    .page-header p { font-size: var(--fs-lg); font-weight: 300; line-height: 1.9; color: var(--muted); max-width: 520px; }
+
+    .stats-bar {
+      position: relative; z-index: 1;
+      margin: 0 80px 52px;
+      background: linear-gradient(135deg, rgba(249,219,183,0.5), rgba(244,185,125,0.2));
+      border: 1px solid rgba(244,185,125,0.4);
+      border-radius: 20px; padding: 32px 48px;
+      display: flex; gap: 48px; flex-wrap: wrap; align-items: center;
+      opacity: 0; animation: fadeUp 0.7s 0.35s forwards;
+    }
+    .stat { text-align: center; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--tangerine); font-weight: 700; }
+    .stat-label { font-size: var(--fs-xxs); letter-spacing: var(--fs-label-ls); text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+    .stat-divider { width: 1px; height: 48px; background: rgba(244,185,125,0.4); }
+
+    .filter-bar {
+      position: relative; z-index: 1;
+      padding: 0 80px 48px;
+      display: flex; gap: 12px; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.7s 0.45s forwards;
+    }
+    .filter-btn {
+      background: rgba(232,135,58,0.08); border: 1px solid rgba(232,135,58,0.22);
+      color: var(--muted); font-size: var(--fs-xxs); font-weight: 500;
+      letter-spacing: var(--fs-label-ls); text-transform: uppercase;
+      padding: 8px 20px; border-radius: 100px; cursor: pointer;
+      transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+    }
+    .filter-btn:hover, .filter-btn.active { background: var(--tangerine); color: #fff; border-color: var(--tangerine); }
+
+    .cert-grid {
+      position: relative; z-index: 1;
+      padding: 0 80px 120px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .cert-card {
+      background: rgba(253,246,236,0.75);
+      border: 1px solid rgba(244,185,125,0.4);
+      border-radius: 20px; padding: 32px;
+      transition: transform 0.25s, box-shadow 0.25s;
+      opacity: 0; animation: fadeUp 0.6s forwards;
+      display: flex; flex-direction: column; gap: 14px;
+      backdrop-filter: blur(8px);
+    }
+    .cert-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(232,135,58,0.14); }
+    .cert-card.hidden { display: none; }
+
+    .cert-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    .cert-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--apricot), var(--tangerine));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.5px;
+      color: #fff; text-transform: uppercase; flex-shrink: 0;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .cert-badge {
+      font-size: var(--fs-xxs); font-weight: 500; letter-spacing: var(--fs-label-ls);
+      text-transform: uppercase; padding: 5px 13px; border-radius: 100px; white-space: nowrap;
+    }
+    .cert-badge.verified  { background: rgba(72,187,120,0.12); color: #276749; border: 1px solid rgba(72,187,120,0.3); }
+    .cert-badge.expired     { background: rgba(160,160,160,0.12); color: #777;    border: 1px solid rgba(160,160,160,0.3); }
+    .cert-badge.in-progress { background: rgba(232,135,58,0.12);  color: var(--rust); border: 1px solid rgba(232,135,58,0.3); }
+    .cert-badge.education { background: rgba(99,102,241,0.10); color: #4338ca;  border: 1px solid rgba(99,102,241,0.25); }
+
+    .cert-body h3 {
+      font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700;
+      color: var(--brown); line-height: 1.35; margin-bottom: 5px;
+    }
+    .cert-issuer { font-size: var(--fs-sm); color: var(--muted); }
+
+    .cert-meta { display: flex; gap: 16px; flex-wrap: wrap; }
+    .cert-meta-item { font-size: var(--fs-xxs); color: var(--muted); }
+
+    .cert-desc {
+      font-size: var(--fs-xs); color: var(--muted); line-height: 1.75;
+      border-top: 1px solid rgba(244,185,125,0.3); padding-top: 12px;
+    }
+
+    .cert-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .cert-tag {
+      background: rgba(232,135,58,0.08); border: 1px solid rgba(232,135,58,0.2);
+      color: var(--rust); font-size: var(--fs-xxs); padding: 4px 12px; border-radius: 100px;
+    }
+
+    .cert-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
+    .cert-id { font-size: var(--fs-xxs); color: var(--muted); opacity: 0.65; font-family: monospace; }
+    .cert-link {
+      text-decoration: none; color: var(--tangerine); font-size: var(--fs-sm); font-weight: 500;
+      display: flex; align-items: center; gap: 6px; transition: gap 0.2s, color 0.2s;
+    }
+    .cert-link:hover { color: var(--rust); gap: 10px; }
+
+    .cert-card:nth-child(1)  { animation-delay: 0.55s; }
+    .cert-card:nth-child(2)  { animation-delay: 0.62s; }
+    .cert-card:nth-child(3)  { animation-delay: 0.69s; }
+    .cert-card:nth-child(4)  { animation-delay: 0.76s; }
+    .cert-card:nth-child(5)  { animation-delay: 0.83s; }
+    .cert-card:nth-child(6)  { animation-delay: 0.90s; }
+    .cert-card:nth-child(7)  { animation-delay: 0.97s; }
+    .cert-card:nth-child(8)  { animation-delay: 1.04s; }
+    .cert-card:nth-child(9)  { animation-delay: 1.11s; }
+
+    footer {
+      position: relative; z-index: 1; text-align: center; padding: 32px;
+      font-size: var(--fs-sm); color: var(--muted); border-top: 1px solid rgba(244,185,125,0.25);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 18px 24px; }
+      .page-header { padding: 120px 24px 40px; }
+      .filter-bar { padding: 0 24px 36px; }
+      .cert-grid { padding: 0 24px 80px; grid-template-columns: 1fr; }
+      .stats-bar { margin: 0 24px 48px; padding: 24px 28px; gap: 24px; }
+      .stat-divider { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="blob-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">✦ Eva's Portfolio</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="achievements.html">Achievements</a>
+      <a href="certifications.html" class="active">Certifications</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <p class="section-label">Certifications</p>
+    <h1>Skills earned,<br/>knowledge <em>verified.</em></h1>
+    <p>A collection of courses, certifications, and credentials I've earned across biomedical engineering, healthcare, data, and design.</p>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="stat-num">10</div>
+      <div class="stat-label">Total Credentials</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-num">8</div>
+      <div class="stat-label">Active</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-num">6</div>
+      <div class="stat-label">Disciplines</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-num">2026</div>
+      <div class="stat-label">Latest Issued</div>
+    </div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="healthcare">Healthcare</button>
+    <button class="filter-btn" data-filter="tech">Tech & Design</button>
+    <button class="filter-btn" data-filter="writing">Writing</button>
+    <button class="filter-btn" data-filter="education">Education</button>
+    <button class="filter-btn" data-filter="ongoing">Ongoing</button>
+  </div>
+
+  <div class="cert-grid">
+
+    <div class="cert-card" data-category="ongoing">
+      <div class="cert-card-top">
+        <span class="cert-badge in-progress">Ongoing</span>
+      </div>
+      <div class="cert-body">
+        <h3>AI in Healthcare Specialisation</h3>
+        <div class="cert-issuer">Stanford University</div>
+      </div>
+      <div class="cert-meta">
+        <div class="cert-meta-item">In Progress</div>
+      </div>
+      <div class="cert-tags">
+        <span class="cert-tag">Artificial Intelligence</span>
+        <span class="cert-tag">Healthcare</span>
+        <span class="cert-tag">Machine Learning</span>
+      </div>
+    </div>
+
+    <div class="cert-card" data-category="writing">
+      <div class="cert-card-top">
+        <span class="cert-badge verified">Verified</span>
+      </div>
+      <div class="cert-body">
+        <h3>Writing in the Sciences</h3>
+        <div class="cert-issuer">Stanford University</div>
+      </div>
+      <div class="cert-meta">
+        <div class="cert-meta-item">Jan 2026</div>
+      </div>
+      <div class="cert-tags">
+        <span class="cert-tag">Scientific Writing</span>
+      </div>
+      <div class="cert-footer">
+        <span class="cert-id">RN3JUWKPWIQ5</span>
+        <a href="#" class="cert-link">View credential →</a>
+      </div>
+    </div>
+
+    <div class="cert-card" data-category="healthcare">
+      <div class="cert-card-top">
+        <span class="cert-badge verified">Verified</span>
+      </div>
+      <div class="cert-body">
+        <h3>Coding and Medical Necessity</h3>
+        <div class="cert-issuer">AAPC</div>
+      </div>
+      <div class="cert-meta">
+        <div class="cert-meta-item">Dec 2025</div>
+      </div>
+      <div class="cert-tags">
+        <span class="cert-tag">Medical Coding</span>
+        <span class="cert-tag">Clinical Documentation</span>
+      </div>
+      <div class="cert-footer">
+        <span class="cert-id">K5Q1KW2FR764</span>
+        <a href="#" class="cert-link">View credential →</a>
+      </div>
+    </div>
+
+    <div class="cert-card" data-category="tech">
+      <div class="cert-card-top">
+        <span class="cert-badge verified">Verified</span>
+      </div>
+      <div class="cert-body">
+        <h3>Foundations of User Experience (UX) Design</h3>
+        <div class="cert-issuer">Google</div>
+      </div>
+      <div class="cert-meta">
+        <div class="cert-meta-item">Dec 2025</div>
+      </div>
+      <div class="cert-tags">
+        <span class="cert-tag">UX Design</span>
+        <span class="cert-tag">Design Thinking</span>
+      </div>
+      <div class="cert-footer">
+        <span class="cert-id">33MZBMOOGUXT</span>
+        <a href="#" class="cert-link">View credential →</a>
+      </div>
+    </div>
+
+    <div class="cert-card" data-category="healthcare">
+      <div class="cert-card-top">
+        <span class="cert-badge verified">Verified</span>
+      </div>
+      <div class="cert-body">
+        <h3>Audible Contrast Threshold (ACT) — An Introduction</h3>
+        <div class="cert-issuer">Interacoustics A/S · Interacoustics Academy</div>
+      </div>
+      <div class="cert-meta">
+        <div class="cert-meta-item">Oct 2025</div>
+      </div>
+      <div class="cert-desc">
+        Covered the purpose and principles of the ACT test, its role in assessing patients' ability to hear in noise, and its language-independent design. Learned to perform, interpret, and apply ACT values to optimize hearing aid programming and patient counselling in noisy environments.
+      </div>
+      <div class="cert-tags">
+        <span class="cert-tag">Audiology</span>
+        <span class="cert-tag">Hearing Aids</span>
+        <span class="cert-tag">Clinical Testing</span>
+      </div>
+    </div>
+
+    <div class="cert-card" data-category="healthcare">
+      <div class="cert-card-top">
+        <span class="cert-badge verified">Verified</span>
+      </div>
+      <div class="cert-body">
+        <h3>Getting Started in Videonystagmography (VNG)</h3>
+        <div class="cert-issuer">Interacoustics A/S · Interacoustics Academy</div>
+      </div>
+      <div class="cert-meta">
+        <div class="cert-meta-item">Oct 2025</div>
+      </div>
+      <div class="cert-desc">
+        Covered patient interaction, use of VNG goggles, key subtests, and basic interpretation of vestibular assessment results.
+      </div>
+      <div class="cert-tags">
+        <span class="cert-tag">VNG</span>
+        <span class="cert-tag">Vestibular Assessment</span>
+        <span class="cert-tag">Diagnostics</span>
+      </div>
+    </div>
+
+    <div class="cert-card" data-category="healthcare">
+      <div class="cert-card-top">
+        <span class="cert-badge verified">Verified</span>
+      </div>
+      <div class="cert-body">
+        <h3>Motor Neurone Disease MOOC 2025</h3>
+        <div class="cert-issuer">Wicking Dementia Research & Education Centre</div>
+      </div>
+      <div class="cert-meta">
+        <div class="cert-meta-item">Sep 2025</div>
+      </div>
+      <div class="cert-desc">
+        Completed an in-depth course covering MND epidemiology, genetics, risk factors, nervous and motor system changes, diagnostic pathways, multidisciplinary care, and strategies to support daily living and quality of life.
+      </div>
+      <div class="cert-tags">
+        <span class="cert-tag">Neurodegenerative Disease</span>
+        <span class="cert-tag">Clinical Care</span>
+        <span class="cert-tag">Multidisciplinary</span>
+      </div>
+    </div>
+
+    <div class="cert-card" data-category="education">
+      <div class="cert-card-top">
+        <span class="cert-badge education">Education</span>
+      </div>
+      <div class="cert-body">
+        <h3>Diploma in Biomedical Engineering</h3>
+        <div class="cert-issuer">Temasek Polytechnic</div>
+      </div>
+      <div class="cert-meta">
+        <div class="cert-meta-item">May 2024</div>
+      </div>
+      <div class="cert-tags">
+        <span class="cert-tag">Biomedical Engineering</span>
+        <span class="cert-tag">Medical Devices</span>
+        <span class="cert-tag">R&D</span>
+      </div>
+    </div>
+
+    <div class="cert-card" data-category="education">
+      <div class="cert-card-top">
+        <span class="cert-badge verified">Verified</span>
+      </div>
+      <div class="cert-body">
+        <h3>Certificate in University Preparatory Programme Mathematics</h3>
+        <div class="cert-issuer">Temasek Polytechnic</div>
+      </div>
+      <div class="cert-meta">
+        <div class="cert-meta-item">Nov 2023</div>
+      </div>
+      <div class="cert-tags">
+        <span class="cert-tag">Mathematics</span>
+      </div>
+      <div class="cert-footer">
+        <span class="cert-id">TP-TSA-2023-1690</span>
+        <a href="#" class="cert-link">View credential →</a>
+      </div>
+    </div>
+
+    <div class="cert-card" data-category="tech">
+      <div class="cert-card-top">
+        <span class="cert-badge expired">Expired</span>
+      </div>
+      <div class="cert-body">
+        <h3>Google Analytics for Beginners</h3>
+        <div class="cert-issuer">Google</div>
+      </div>
+      <div class="cert-meta">
+        <div class="cert-meta-item">Apr 2022 · Expired Apr 2025</div>
+      </div>
+      <div class="cert-tags">
+        <span class="cert-tag">Google Analytics</span>
+        <span class="cert-tag">Data Analysis</span>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>Made with curiosity and sunshine ☀️</p>
+  </footer>
+
+  <script>
+    const btns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.cert-card');
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        btns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        cards.forEach(card => {
+          card.classList.toggle('hidden', filter !== 'all' && card.dataset.category !== filter);
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
