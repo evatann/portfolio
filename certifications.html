@@ -97,24 +97,41 @@
     .stat-label { font-size: var(--fs-xxs); letter-spacing: var(--fs-label-ls); text-transform: uppercase; color: var(--muted); margin-top: 4px; }
     .stat-divider { width: 1px; height: 48px; background: rgba(244,185,125,0.4); }
 
-    .filter-bar {
+    .controls-separator {
       position: relative; z-index: 1;
-      padding: 0 80px 48px;
-      display: flex; gap: 12px; flex-wrap: wrap;
+      border: none; border-top: 1px solid rgba(244,185,125,0.35);
+      margin: 0 80px;
+    }
+    .controls-bar {
+      position: relative; z-index: 1;
+      padding: 28px 80px;
+      display: flex; flex-direction: column; gap: 14px;
       opacity: 0; animation: fadeUp 0.7s 0.45s forwards;
     }
-    .filter-btn {
-      background: rgba(232,135,58,0.08); border: 1px solid rgba(232,135,58,0.22);
+    .control-row {
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    }
+    .control-label {
+      font-size: var(--fs-xxs); letter-spacing: var(--fs-label-ls); text-transform: uppercase;
+      color: var(--muted); font-weight: 500; min-width: 44px;
+    }
+    .filter-btn, .sort-btn {
+      background: transparent; border: 1px solid rgba(232,135,58,0.22);
       color: var(--muted); font-size: var(--fs-xxs); font-weight: 500;
       letter-spacing: var(--fs-label-ls); text-transform: uppercase;
-      padding: 8px 20px; border-radius: 100px; cursor: pointer;
+      padding: 7px 16px; border-radius: 100px; cursor: pointer;
       transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+      display: inline-flex; align-items: center; gap: 5px;
     }
-    .filter-btn:hover, .filter-btn.active { background: var(--tangerine); color: #fff; border-color: var(--tangerine); }
+    .filter-btn:hover { background: rgba(232,135,58,0.08); color: var(--rust); border-color: var(--apricot); }
+    .filter-btn.active { background: var(--tangerine); color: #fff; border-color: var(--tangerine); }
+    .sort-btn:hover { background: rgba(232,135,58,0.08); color: var(--rust); border-color: var(--apricot); }
+    .sort-btn.active { background: rgba(232,135,58,0.08); color: var(--rust); border-color: var(--apricot); }
+    .sort-icon { opacity: 0.7; font-style: normal; }
 
     .cert-grid {
       position: relative; z-index: 1;
-      padding: 0 80px 120px;
+      padding: 48px 80px 120px;
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 24px;
@@ -201,7 +218,8 @@
     @media (max-width: 768px) {
       nav { padding: 18px 24px; }
       .page-header { padding: 120px 24px 40px; }
-      .filter-bar { padding: 0 24px 36px; }
+      .controls-separator { margin: 0 24px; }
+      .controls-bar { padding: 20px 24px; }
       .cert-grid { padding: 0 24px 80px; grid-template-columns: 1fr; }
       .stats-bar { margin: 0 24px 48px; padding: 24px 28px; gap: 24px; }
       .stat-divider { display: none; }
@@ -255,19 +273,33 @@
     </div>
   </div>
 
-  <div class="filter-bar">
-    <button class="filter-btn active" data-filter="all">All</button>
-    <button class="filter-btn" data-filter="healthcare">Healthcare</button>
-    <button class="filter-btn" data-filter="tech">Tech & Design</button>
-    <button class="filter-btn" data-filter="writing">Writing</button>
-    <button class="filter-btn" data-filter="education">Education</button>
-    <button class="filter-btn" data-filter="ongoing">Ongoing</button>
+  <hr class="controls-separator"/>
+
+  <div class="controls-bar">
+    <div class="control-row">
+      <span class="control-label">Filter</span>
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="healthcare">Healthcare</button>
+      <button class="filter-btn" data-filter="tech">Tech & Design</button>
+      <button class="filter-btn" data-filter="writing">Writing</button>
+      <button class="filter-btn" data-filter="education">Education</button>
+      <button class="filter-btn" data-filter="ongoing">Ongoing</button>
+    </div>
+    <div class="control-row">
+      <span class="control-label">Sort</span>
+      <button class="sort-btn active" data-sort="date-desc">Latest first <span class="sort-icon">↓</span></button>
+      <button class="sort-btn" data-sort="date-asc">Oldest first <span class="sort-icon">↑</span></button>
+      <button class="sort-btn" data-sort="alpha">A → Z <span class="sort-icon">↓</span></button>
+    </div>
   </div>
+
+  <hr class="controls-separator"/>
 
   <div class="cert-grid">
 
-    <div class="cert-card" data-category="ongoing">
+    <div class="cert-card" data-category="ongoing" data-date="99999999" data-title="AI in Healthcare Specialisation">
       <div class="cert-card-top">
+        <div class="cert-icon">AI</div>
         <span class="cert-badge in-progress">Ongoing</span>
       </div>
       <div class="cert-body">
@@ -284,8 +316,9 @@
       </div>
     </div>
 
-    <div class="cert-card" data-category="writing">
+    <div class="cert-card" data-category="writing" data-date="20260101" data-title="Writing in the Sciences">
       <div class="cert-card-top">
+        <div class="cert-icon">Sci</div>
         <span class="cert-badge verified">Verified</span>
       </div>
       <div class="cert-body">
@@ -304,8 +337,9 @@
       </div>
     </div>
 
-    <div class="cert-card" data-category="healthcare">
+    <div class="cert-card" data-category="healthcare" data-date="20251201" data-title="Coding and Medical Necessity">
       <div class="cert-card-top">
+        <div class="cert-icon">Med</div>
         <span class="cert-badge verified">Verified</span>
       </div>
       <div class="cert-body">
@@ -325,8 +359,9 @@
       </div>
     </div>
 
-    <div class="cert-card" data-category="tech">
+    <div class="cert-card" data-category="tech" data-date="20251201" data-title="Foundations of User Experience (UX) Design">
       <div class="cert-card-top">
+        <div class="cert-icon">UX</div>
         <span class="cert-badge verified">Verified</span>
       </div>
       <div class="cert-body">
@@ -346,8 +381,9 @@
       </div>
     </div>
 
-    <div class="cert-card" data-category="healthcare">
+    <div class="cert-card" data-category="healthcare" data-date="20251001" data-title="Audible Contrast Threshold (ACT) An Introduction">
       <div class="cert-card-top">
+        <div class="cert-icon">ACT</div>
         <span class="cert-badge verified">Verified</span>
       </div>
       <div class="cert-body">
@@ -367,8 +403,9 @@
       </div>
     </div>
 
-    <div class="cert-card" data-category="healthcare">
+    <div class="cert-card" data-category="healthcare" data-date="20251001" data-title="Getting Started in Videonystagmography (VNG)">
       <div class="cert-card-top">
+        <div class="cert-icon">VNG</div>
         <span class="cert-badge verified">Verified</span>
       </div>
       <div class="cert-body">
@@ -388,8 +425,9 @@
       </div>
     </div>
 
-    <div class="cert-card" data-category="healthcare">
+    <div class="cert-card" data-category="healthcare" data-date="20250901" data-title="Motor Neurone Disease MOOC 2025">
       <div class="cert-card-top">
+        <div class="cert-icon">MND</div>
         <span class="cert-badge verified">Verified</span>
       </div>
       <div class="cert-body">
@@ -409,8 +447,9 @@
       </div>
     </div>
 
-    <div class="cert-card" data-category="education">
+    <div class="cert-card" data-category="education" data-date="20240501" data-title="Diploma in Biomedical Engineering">
       <div class="cert-card-top">
+        <div class="cert-icon">Dip</div>
         <span class="cert-badge education">Education</span>
       </div>
       <div class="cert-body">
@@ -427,8 +466,9 @@
       </div>
     </div>
 
-    <div class="cert-card" data-category="education">
+    <div class="cert-card" data-category="education" data-date="20231101" data-title="Certificate in University Preparatory Programme Mathematics">
       <div class="cert-card-top">
+        <div class="cert-icon">Mth</div>
         <span class="cert-badge verified">Verified</span>
       </div>
       <div class="cert-body">
@@ -443,12 +483,13 @@
       </div>
       <div class="cert-footer">
         <span class="cert-id">TP-TSA-2023-1690</span>
-        <a href="#" class="cert-link">View credential →</a>
+        <a href="https://acrobat.adobe.com/link/track?uri=urn:aaid:scds:US:4b772cdb-8245-3d3e-afb1-3ba805224a54" target="_blank" class="cert-link">View credential →</a>
       </div>
     </div>
 
-    <div class="cert-card" data-category="tech">
+    <div class="cert-card" data-category="tech" data-date="20220401" data-title="Google Analytics for Beginners">
       <div class="cert-card-top">
+        <div class="cert-icon">GA</div>
         <span class="cert-badge expired">Expired</span>
       </div>
       <div class="cert-body">
@@ -471,18 +512,54 @@
   </footer>
 
   <script>
-    const btns = document.querySelectorAll('.filter-btn');
-    const cards = document.querySelectorAll('.cert-card');
-    btns.forEach(btn => {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const sortBtns   = document.querySelectorAll('.sort-btn');
+    const grid       = document.querySelector('.cert-grid');
+
+    let currentFilter = 'all';
+    let currentSort   = 'date-desc';
+
+    function applyFilterAndSort() {
+      const allCards = Array.from(grid.querySelectorAll('.cert-card'));
+
+      // Filter visibility
+      allCards.forEach(card => {
+        const match = currentFilter === 'all' || card.dataset.category === currentFilter;
+        card.classList.toggle('hidden', !match);
+      });
+
+      // Sort visible cards
+      const visible = allCards.filter(c => !c.classList.contains('hidden'));
+      visible.sort((a, b) => {
+        if (currentSort === 'date-desc') return Number(b.dataset.date) - Number(a.dataset.date);
+        if (currentSort === 'date-asc')  return Number(a.dataset.date) - Number(b.dataset.date);
+        if (currentSort === 'alpha')     return a.dataset.title.localeCompare(b.dataset.title);
+      });
+
+      // Re-append in sorted order (hidden ones stay at end, out of flow)
+      visible.forEach(card => grid.appendChild(card));
+    }
+
+    filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        btns.forEach(b => b.classList.remove('active'));
+        filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        const filter = btn.dataset.filter;
-        cards.forEach(card => {
-          card.classList.toggle('hidden', filter !== 'all' && card.dataset.category !== filter);
-        });
+        currentFilter = btn.dataset.filter;
+        applyFilterAndSort();
       });
     });
+
+    sortBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        sortBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentSort = btn.dataset.sort;
+        applyFilterAndSort();
+      });
+    });
+
+    // Apply default sort on load
+    applyFilterAndSort();
   </script>
 
 </body>
