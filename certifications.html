@@ -72,9 +72,11 @@
       padding: 160px 80px 60px; max-width: 860px;
       opacity: 0; animation: fadeUp 0.7s 0.2s forwards;
     }
-    .section-label {
-      font-size: var(--fs-xxs); letter-spacing: var(--fs-label-ls); text-transform: uppercase;
-      color: var(--tangerine); font-weight: 500; margin-bottom: 16px;
+    .hero-tag {
+      display: inline-block; font-size: var(--fs-xxs); font-weight: 500;
+      letter-spacing: var(--fs-label-ls); text-transform: uppercase;
+      color: var(--rust); background: rgba(232,135,58,0.12); border: 1px solid rgba(232,135,58,0.3);
+      border-radius: 100px; padding: 6px 16px; margin-bottom: 22px;
     }
     .page-header h1 {
       font-family: 'Playfair Display', serif;
@@ -247,7 +249,7 @@
   </nav>
 
   <div class="page-header">
-    <p class="section-label">Certifications</p>
+    <span class="hero-tag">✦ Certifications</span>
     <h1>Skills earned,<br/>knowledge <em>verified.</em></h1>
     <p>A collection of courses, certifications, and credentials I've earned across biomedical engineering, healthcare, data, and design.</p>
   </div>
@@ -546,13 +548,11 @@
     function applyFilterAndSort() {
       const allCards = Array.from(grid.querySelectorAll('.cert-card'));
 
-      // Filter visibility
       allCards.forEach(card => {
         const match = currentFilter === 'all' || card.dataset.category === currentFilter;
         card.classList.toggle('hidden', !match);
       });
 
-      // Sort visible cards
       const visible = allCards.filter(c => !c.classList.contains('hidden'));
       visible.sort((a, b) => {
         if (currentSort === 'date-desc') return Number(b.dataset.date) - Number(a.dataset.date);
@@ -560,7 +560,6 @@
         if (currentSort === 'alpha')     return a.dataset.title.localeCompare(b.dataset.title);
       });
 
-      // Re-append in sorted order (hidden ones stay at end, out of flow)
       visible.forEach(card => grid.appendChild(card));
     }
 
@@ -582,7 +581,6 @@
       });
     });
 
-    // Apply default sort on load
     applyFilterAndSort();
   </script>
 

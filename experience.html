@@ -25,11 +25,11 @@
       --fs-label-ls:  2.5px;
       --fs-lg:        1.05rem;
       --fs-nav-logo:  1.25rem;
-      --fs-h-hero:    clamp(2.4rem, 5vw, 4rem);
+      --fs-h-hero:    clamp(3rem, 7vw, 5.5rem);
       --fs-h-section: clamp(1.6rem, 3vw, 2.2rem);
     }
 
-    html { scroll-behavior: smooth; font-size: 18px; }
+    html { scroll-behavior: smooth; font-size: 20px; }
 
     body {
       font-family: 'DM Sans', sans-serif;
@@ -74,29 +74,33 @@
     /* ── Page Header ── */
     .page-header {
       position: relative; z-index: 1;
-      padding: 140px 80px 60px;
-      max-width: 900px;
-      opacity: 0; animation: fadeUp 0.7s 0.2s forwards;
+      padding: 140px 80px 80px;
+      max-width: 960px;
     }
     .page-header .hero-tag {
       display: inline-block; font-size: var(--fs-xxs); font-weight: 500;
       letter-spacing: var(--fs-label-ls); text-transform: uppercase;
       color: var(--rust); background: rgba(232,135,58,0.12); border: 1px solid rgba(232,135,58,0.3);
-      border-radius: 100px; padding: 6px 16px; margin-bottom: 22px;
+      border-radius: 100px; padding: 6px 16px; margin-bottom: 28px;
+      opacity: 0; animation: fadeUp 0.7s 0.2s forwards;
     }
     .page-header h1 {
       font-family: 'Playfair Display', serif;
-      font-size: var(--fs-h-hero); line-height: 1.15; color: var(--brown); margin-bottom: 16px;
+      font-size: var(--fs-h-hero); line-height: 1.15; color: var(--brown); margin-bottom: 24px;
+      opacity: 0; animation: fadeUp 0.7s 0.4s forwards;
     }
     .page-header h1 em { color: var(--tangerine); font-style: italic; }
-    .page-header p { font-size: var(--fs-lg); color: var(--muted); line-height: 1.8; max-width: 520px; }
+    .page-header p {
+      font-size: var(--fs-lg); font-weight: 300; color: var(--muted); line-height: 1.9; max-width: 520px;
+      opacity: 0; animation: fadeUp 0.7s 0.6s forwards;
+    }
 
     /* ── Tab Bar ── */
     .tab-wrapper {
       position: relative; z-index: 1;
       padding: 0 80px;
       margin-bottom: 0;
-      opacity: 0; animation: fadeUp 0.7s 0.45s forwards;
+      opacity: 0; animation: fadeUp 0.7s 0.7s forwards;
     }
     .tab-bar {
       display: inline-flex; gap: 6px;
@@ -204,9 +208,7 @@
     .card-body p { margin-bottom: 10px; }
     .card-body p:last-child { margin-bottom: 0; }
 
-    .card-list {
-      list-style: none; margin: 8px 0;
-    }
+    .card-list { list-style: none; margin: 8px 0; }
     .card-list li {
       font-size: var(--fs-sm); color: var(--muted); line-height: 1.75;
       padding-left: 18px; position: relative; margin-bottom: 5px;
@@ -223,7 +225,6 @@
       border-radius: 100px; padding: 4px 12px;
     }
 
-    /* Award badge */
     .award-badge {
       display: inline-flex; align-items: center; gap: 6px;
       font-size: var(--fs-xs); font-weight: 500;
@@ -233,7 +234,6 @@
       margin-top: 10px; margin-right: 8px;
     }
 
-    /* Leadership grid inside Education */
     .leadership-grid {
       display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 14px; margin-top: 10px;
@@ -247,7 +247,6 @@
     .leadership-item .role { font-size: var(--fs-sm); font-weight: 500; color: var(--brown); margin-bottom: 3px; }
     .leadership-item .org  { font-size: var(--fs-xs); color: var(--muted); }
 
-    /* Volunteering grid for small cards */
     .vol-grid {
       display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 20px;
@@ -265,7 +264,6 @@
     .vol-card .card-date { font-size: var(--fs-xs); }
     .vol-card .card-body { font-size: var(--fs-xs); color: var(--muted); line-height: 1.75; }
 
-    /* Section sub-header */
     .sub-header { margin-bottom: 32px; }
     .sub-header h2 { font-family: 'Playfair Display', serif; font-size: var(--fs-h-section); color: var(--brown); margin-bottom: 8px; }
     .sub-header p { font-size: var(--fs-sm); color: var(--muted); line-height: 1.75; }
@@ -799,7 +797,6 @@
   </footer>
 
   <script>
-    // Tab switching
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabPanels = document.querySelectorAll('.tab-panel');
 
@@ -809,12 +806,10 @@
         tabPanels.forEach(p => p.classList.remove('active'));
         btn.classList.add('active');
         document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
-        // Re-trigger scroll animations for newly visible items
         observeItems();
       });
     });
 
-    // Scroll-triggered fade-in for timeline items
     function observeItems() {
       const items = document.querySelectorAll('.timeline-item:not(.visible)');
       const observer = new IntersectionObserver((entries) => {
@@ -830,7 +825,6 @@
 
     observeItems();
 
-    // Active nav link
     document.querySelectorAll('.nav-links a').forEach(a => {
       if (a.href === window.location.href) a.classList.add('active');
     });
