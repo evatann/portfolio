@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Eva Tan — Experience</title>
+  <title>Certifications — Eva Tan</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -26,11 +26,9 @@
       --fs-lg:        1.05rem;
       --fs-nav-logo:  1.25rem;
       --fs-h-hero:    clamp(2.4rem, 5vw, 4rem);
-      --fs-h-section: clamp(1.6rem, 3vw, 2.2rem);
     }
 
-    html { scroll-behavior: smooth; font-size: 18px; }
-
+    html { scroll-behavior: smooth; font-size: 20px; }
     body {
       font-family: 'DM Sans', sans-serif;
       background-color: var(--cream);
@@ -39,9 +37,8 @@
       overflow-x: hidden;
     }
 
-    /* ── Blobs ── */
     .blob-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-    .blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.32; }
+    .blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.35; }
     .blob-1 { width: 520px; height: 520px; background: var(--apricot); top: -120px; left: -100px; animation: drift 12s ease-in-out infinite alternate; }
     .blob-2 { width: 400px; height: 400px; background: var(--peach); bottom: -80px; right: -80px; animation: drift 15s ease-in-out infinite alternate-reverse; }
     .blob-3 { width: 260px; height: 260px; background: var(--tangerine); top: 40%; left: 60%; animation: drift 10s ease-in-out infinite alternate; }
@@ -50,7 +47,6 @@
       to   { transform: translate(30px,20px) scale(1.08); }
     }
 
-    /* ── Nav ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
@@ -71,224 +67,148 @@
     .nav-links a.active { color: var(--tangerine); }
     .nav-links a.active::after { width: 100%; }
 
-    /* ── Page Header ── */
     .page-header {
       position: relative; z-index: 1;
-      padding: 140px 80px 60px;
-      max-width: 900px;
+      padding: 160px 80px 60px; max-width: 860px;
       opacity: 0; animation: fadeUp 0.7s 0.2s forwards;
     }
-    .page-header .hero-tag {
-      display: inline-block; font-size: var(--fs-xxs); font-weight: 500;
-      letter-spacing: var(--fs-label-ls); text-transform: uppercase;
-      color: var(--rust); background: rgba(232,135,58,0.12); border: 1px solid rgba(232,135,58,0.3);
-      border-radius: 100px; padding: 6px 16px; margin-bottom: 22px;
+    .section-label {
+      font-size: var(--fs-xxs); letter-spacing: var(--fs-label-ls); text-transform: uppercase;
+      color: var(--tangerine); font-weight: 500; margin-bottom: 16px;
     }
     .page-header h1 {
       font-family: 'Playfair Display', serif;
-      font-size: var(--fs-h-hero); line-height: 1.15; color: var(--brown); margin-bottom: 16px;
+      font-size: var(--fs-h-hero); line-height: 1.15; color: var(--brown); margin-bottom: 18px;
     }
     .page-header h1 em { color: var(--tangerine); font-style: italic; }
-    .page-header p { font-size: var(--fs-lg); color: var(--muted); line-height: 1.8; max-width: 520px; }
+    .page-header p { font-size: var(--fs-lg); font-weight: 300; line-height: 1.9; color: var(--muted); max-width: 520px; }
 
-    /* ── Tab Bar ── */
-    .tab-wrapper {
+    .stats-bar {
       position: relative; z-index: 1;
-      padding: 0 80px;
-      margin-bottom: 0;
+      margin: 0 80px 52px;
+      background: linear-gradient(135deg, rgba(249,219,183,0.5), rgba(244,185,125,0.2));
+      border: 1px solid rgba(244,185,125,0.4);
+      border-radius: 20px; padding: 32px 48px;
+      display: flex; gap: 48px; flex-wrap: wrap; align-items: center;
+      opacity: 0; animation: fadeUp 0.7s 0.35s forwards;
+    }
+    .stat { text-align: center; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--tangerine); font-weight: 700; }
+    .stat-label { font-size: var(--fs-xxs); letter-spacing: var(--fs-label-ls); text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+    .stat-divider { width: 1px; height: 48px; background: rgba(244,185,125,0.4); }
+
+    .controls-separator {
+      position: relative; z-index: 1;
+      border: none; border-top: 1px solid rgba(244,185,125,0.35);
+      margin: 0 80px;
+    }
+    .controls-bar {
+      position: relative; z-index: 1;
+      padding: 28px 80px;
+      display: flex; flex-direction: column; gap: 14px;
       opacity: 0; animation: fadeUp 0.7s 0.45s forwards;
     }
-    .tab-bar {
-      display: inline-flex; gap: 6px;
-      background: rgba(249,219,183,0.5);
-      border: 1px solid rgba(244,185,125,0.45);
-      border-radius: 100px; padding: 6px;
+    .control-row {
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
     }
-    .tab-btn {
-      cursor: pointer; border: none; background: transparent;
-      font-family: 'DM Sans', sans-serif;
-      font-size: var(--fs-sm); font-weight: 500;
-      color: var(--muted); padding: 10px 24px; border-radius: 100px;
-      transition: all 0.25s; letter-spacing: 0.2px;
-      display: flex; align-items: center; gap: 7px;
-    }
-    .tab-btn:hover { color: var(--rust); background: rgba(232,135,58,0.09); }
-    .tab-btn.active {
-      background: var(--tangerine); color: #fff;
-      box-shadow: 0 4px 16px rgba(232,135,58,0.35);
-    }
-    .tab-btn .tab-icon { font-size: 1em; }
-
-    /* ── Main Content ── */
-    .content-area {
-      position: relative; z-index: 1;
-      padding: 48px 80px 100px;
-    }
-
-    .tab-panel { display: none; }
-    .tab-panel.active {
-      display: block;
-      animation: fadeUp 0.4s ease forwards;
-    }
-
-    /* ── Timeline ── */
-    .timeline { position: relative; padding-left: 28px; }
-    .timeline::before {
-      content: '';
-      position: absolute; left: 0; top: 8px; bottom: 8px;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--apricot), rgba(244,185,125,0.15));
-      border-radius: 2px;
-    }
-
-    .timeline-group { margin-bottom: 56px; }
-    .timeline-group-label {
+    .control-label {
       font-size: var(--fs-xxs); letter-spacing: var(--fs-label-ls); text-transform: uppercase;
-      color: var(--tangerine); font-weight: 500; margin-bottom: 20px;
-      padding-left: 20px;
+      color: var(--muted); font-weight: 500; min-width: 44px;
     }
-
-    .timeline-item {
-      position: relative; margin-bottom: 28px;
-      opacity: 0; transform: translateY(16px);
-      transition: opacity 0.4s, transform 0.4s;
-    }
-    .timeline-item.visible { opacity: 1; transform: translateY(0); }
-
-    .timeline-dot {
-      position: absolute; left: -33px; top: 18px;
-      width: 11px; height: 11px; border-radius: 50%;
-      background: var(--apricot); border: 2px solid var(--tangerine);
-      transition: background 0.2s;
-    }
-
-    .timeline-card {
-      background: rgba(249,219,183,0.38);
-      border: 1px solid rgba(244,185,125,0.38);
-      border-radius: 18px; padding: 26px 30px;
-      transition: transform 0.22s, box-shadow 0.22s, border-color 0.22s;
-      cursor: default;
-    }
-    .timeline-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 36px rgba(232,135,58,0.12);
-      border-color: rgba(232,135,58,0.45);
-    }
-    .timeline-card:hover + .timeline-dot,
-    .timeline-item:hover .timeline-dot { background: var(--tangerine); }
-
-    .card-top {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      gap: 12px; flex-wrap: wrap; margin-bottom: 10px;
-    }
-    .card-org {
-      font-size: var(--fs-xxs); font-weight: 500;
+    .filter-btn, .sort-btn {
+      background: transparent; border: 1px solid rgba(232,135,58,0.22);
+      color: var(--muted); font-size: var(--fs-xxs); font-weight: 500;
       letter-spacing: var(--fs-label-ls); text-transform: uppercase;
-      color: var(--rust); margin-bottom: 4px;
+      padding: 7px 16px; border-radius: 100px; cursor: pointer;
+      transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+      display: inline-flex; align-items: center; gap: 5px;
     }
-    .card-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem; color: var(--brown); line-height: 1.3;
-    }
-    .card-date {
-      font-size: var(--fs-xs); color: var(--muted); white-space: nowrap;
-      background: rgba(232,135,58,0.1); border: 1px solid rgba(232,135,58,0.2);
-      border-radius: 100px; padding: 4px 12px; flex-shrink: 0;
-    }
-    .card-location {
-      font-size: var(--fs-xs); color: var(--muted); margin-bottom: 12px;
-      display: flex; align-items: center; gap: 5px;
+    .filter-btn:hover { background: rgba(232,135,58,0.08); color: var(--rust); border-color: var(--apricot); }
+    .filter-btn.active { background: var(--tangerine); color: #fff; border-color: var(--tangerine); }
+    .sort-btn:hover { background: rgba(232,135,58,0.08); color: var(--rust); border-color: var(--apricot); }
+    .sort-btn.active { background: rgba(232,135,58,0.08); color: var(--rust); border-color: var(--apricot); }
+    .sort-icon { opacity: 0.7; font-style: normal; }
+
+    .cert-grid {
+      position: relative; z-index: 1;
+      padding: 48px 80px 120px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
     }
 
-    .card-body { font-size: var(--fs-sm); color: var(--muted); line-height: 1.85; }
-    .card-body p { margin-bottom: 10px; }
-    .card-body p:last-child { margin-bottom: 0; }
+    .cert-card {
+      background: rgba(253,246,236,0.75);
+      border: 1px solid rgba(244,185,125,0.4);
+      border-radius: 20px; padding: 32px;
+      transition: transform 0.25s, box-shadow 0.25s;
+      opacity: 0; animation: fadeUp 0.6s forwards;
+      display: flex; flex-direction: column; gap: 14px;
+      backdrop-filter: blur(8px);
+    }
+    .cert-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(232,135,58,0.14); }
+    .cert-card.hidden { display: none; }
 
-    .card-list {
-      list-style: none; margin: 8px 0;
-    }
-    .card-list li {
-      font-size: var(--fs-sm); color: var(--muted); line-height: 1.75;
-      padding-left: 18px; position: relative; margin-bottom: 5px;
-    }
-    .card-list li::before {
-      content: '✦'; position: absolute; left: 0;
-      color: var(--apricot); font-size: 0.6em; top: 4px;
-    }
-
-    .card-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-    .card-tag {
-      font-size: var(--fs-xs); color: var(--rust); font-weight: 500;
-      background: rgba(232,135,58,0.1); border: 1px solid rgba(232,135,58,0.2);
-      border-radius: 100px; padding: 4px 12px;
-    }
-
-    /* Award badge */
-    .award-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: var(--fs-xs); font-weight: 500;
-      background: linear-gradient(135deg, rgba(244,185,125,0.4), rgba(232,135,58,0.15));
-      border: 1px solid rgba(232,135,58,0.35);
-      color: var(--rust); border-radius: 100px; padding: 5px 14px;
-      margin-top: 10px; margin-right: 8px;
-    }
-
-    /* Leadership grid inside Education */
-    .leadership-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 14px; margin-top: 10px;
-    }
-    .leadership-item {
-      background: rgba(253,246,236,0.7); border: 1px solid rgba(244,185,125,0.35);
-      border-radius: 12px; padding: 16px 18px;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .leadership-item:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,135,58,0.1); }
-    .leadership-item .role { font-size: var(--fs-sm); font-weight: 500; color: var(--brown); margin-bottom: 3px; }
-    .leadership-item .org  { font-size: var(--fs-xs); color: var(--muted); }
-
-    /* Volunteering grid for small cards */
-    .vol-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 20px;
-    }
-    .vol-card {
-      background: rgba(249,219,183,0.38);
-      border: 1px solid rgba(244,185,125,0.38);
-      border-radius: 18px; padding: 24px 26px;
-      transition: transform 0.22s, box-shadow 0.22s;
-    }
-    .vol-card:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(232,135,58,0.12); }
-    .vol-card-icon { font-size: 1.4rem; margin-bottom: 10px; }
-    .vol-card .card-org { margin-bottom: 2px; }
-    .vol-card .card-title { font-size: 1rem; margin-bottom: 8px; }
-    .vol-card .card-date { font-size: var(--fs-xs); }
-    .vol-card .card-body { font-size: var(--fs-xs); color: var(--muted); line-height: 1.75; }
-
-    /* Section sub-header */
-    .sub-header { margin-bottom: 32px; }
-    .sub-header h2 { font-family: 'Playfair Display', serif; font-size: var(--fs-h-section); color: var(--brown); margin-bottom: 8px; }
-    .sub-header p { font-size: var(--fs-sm); color: var(--muted); line-height: 1.75; }
-
-    /* ── Footer ── */
-    footer {
-      position: relative; z-index: 1; text-align: center; padding: 40px 32px;
-      font-size: var(--fs-sm); color: var(--muted);
-      border-top: 1px solid rgba(244,185,125,0.25);
-      display: flex; flex-direction: column; align-items: center; gap: 20px;
-    }
-    .resume-btn {
-      display: inline-flex; align-items: center; gap: 10px;
-      text-decoration: none;
-      background: var(--tangerine); color: #fff;
+    .cert-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    .cert-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--apricot), var(--tangerine));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.5px;
+      color: #fff; text-transform: uppercase; flex-shrink: 0;
       font-family: 'DM Sans', sans-serif;
-      font-size: var(--fs-sm); font-weight: 500;
-      padding: 13px 28px; border-radius: 100px;
-      box-shadow: 0 4px 20px rgba(232,135,58,0.32);
-      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
     }
-    .resume-btn:hover { background: var(--rust); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(196,94,26,0.38); }
-    .resume-btn svg { flex-shrink: 0; }
+    .cert-badge {
+      font-size: var(--fs-xxs); font-weight: 500; letter-spacing: var(--fs-label-ls);
+      text-transform: uppercase; padding: 5px 13px; border-radius: 100px; white-space: nowrap;
+    }
+    .cert-badge.verified  { background: rgba(72,187,120,0.12); color: #276749; border: 1px solid rgba(72,187,120,0.3); }
+    .cert-badge.expired     { background: rgba(160,160,160,0.12); color: #777;    border: 1px solid rgba(160,160,160,0.3); }
+    .cert-badge.in-progress { background: rgba(232,135,58,0.12);  color: var(--rust); border: 1px solid rgba(232,135,58,0.3); }
+    .cert-badge.education { background: rgba(99,102,241,0.10); color: #4338ca;  border: 1px solid rgba(99,102,241,0.25); }
+
+    .cert-body h3 {
+      font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700;
+      color: var(--brown); line-height: 1.35; margin-bottom: 5px;
+    }
+    .cert-issuer { font-size: var(--fs-sm); color: var(--muted); }
+
+    .cert-meta { display: flex; gap: 16px; flex-wrap: wrap; }
+    .cert-meta-item { font-size: var(--fs-xxs); color: var(--muted); }
+
+    .cert-desc {
+      font-size: var(--fs-xs); color: var(--muted); line-height: 1.75;
+      border-top: 1px solid rgba(244,185,125,0.3); padding-top: 12px;
+    }
+
+    .cert-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .cert-tag {
+      background: rgba(232,135,58,0.08); border: 1px solid rgba(232,135,58,0.2);
+      color: var(--rust); font-size: var(--fs-xxs); padding: 4px 12px; border-radius: 100px;
+    }
+
+    .cert-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
+    .cert-id { font-size: var(--fs-xxs); color: var(--muted); opacity: 0.65; font-family: monospace; }
+    .cert-link {
+      text-decoration: none; color: var(--tangerine); font-size: var(--fs-sm); font-weight: 500;
+      display: flex; align-items: center; gap: 6px; transition: gap 0.2s, color 0.2s;
+    }
+    .cert-link:hover { color: var(--rust); gap: 10px; }
+
+    .cert-card:nth-child(1)  { animation-delay: 0.55s; }
+    .cert-card:nth-child(2)  { animation-delay: 0.62s; }
+    .cert-card:nth-child(3)  { animation-delay: 0.69s; }
+    .cert-card:nth-child(4)  { animation-delay: 0.76s; }
+    .cert-card:nth-child(5)  { animation-delay: 0.83s; }
+    .cert-card:nth-child(6)  { animation-delay: 0.90s; }
+    .cert-card:nth-child(7)  { animation-delay: 0.97s; }
+    .cert-card:nth-child(8)  { animation-delay: 1.04s; }
+    .cert-card:nth-child(9)  { animation-delay: 1.11s; }
+
+    footer {
+      position: relative; z-index: 1; text-align: center; padding: 32px;
+      font-size: var(--fs-sm); color: var(--muted); border-top: 1px solid rgba(244,185,125,0.25);
+    }
 
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
@@ -297,12 +217,12 @@
 
     @media (max-width: 768px) {
       nav { padding: 18px 24px; }
-      .nav-links { gap: 18px; }
-      .page-header { padding: 120px 24px 48px; }
-      .tab-wrapper { padding: 0 24px; }
-      .content-area { padding: 36px 24px 80px; }
-      .tab-bar { flex-wrap: wrap; border-radius: 16px; }
-      .vol-grid { grid-template-columns: 1fr; }
+      .page-header { padding: 120px 24px 40px; }
+      .controls-separator { margin: 0 24px; }
+      .controls-bar { padding: 20px 24px; }
+      .cert-grid { padding: 0 24px 80px; grid-template-columns: 1fr; }
+      .stats-bar { margin: 0 24px 48px; padding: 24px 28px; gap: 24px; }
+      .stat-divider { display: none; }
     }
   </style>
 </head>
@@ -327,513 +247,344 @@
   </nav>
 
   <div class="page-header">
-    <span class="hero-tag">✦ My Journey</span>
-    <h1>Education, Experience<br/>&amp; <em>Everything Else.</em></h1>
-    <p>A snapshot of where I've studied, worked, and given back — each chapter shaping who I am today.</p>
+    <p class="section-label">Certifications</p>
+    <h1>Skills earned,<br/>knowledge <em>verified.</em></h1>
+    <p>A collection of courses, certifications, and credentials I've earned across biomedical engineering, healthcare, data, and design.</p>
   </div>
 
-  <div class="tab-wrapper">
-    <div class="tab-bar">
-      <button class="tab-btn active" data-tab="education">
-        <span class="tab-icon">🎓</span> Education
-      </button>
-      <button class="tab-btn" data-tab="experience">
-        <span class="tab-icon">💼</span> Experience
-      </button>
-      <button class="tab-btn" data-tab="volunteering">
-        <span class="tab-icon">🤝</span> Volunteering
-      </button>
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="stat-num">10</div>
+      <div class="stat-label">Total Credentials</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-num">8</div>
+      <div class="stat-label">Active</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-num">6</div>
+      <div class="stat-label">Disciplines</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-num">2026</div>
+      <div class="stat-label">Latest Issued</div>
     </div>
   </div>
 
-  <div class="content-area">
+  <hr class="controls-separator"/>
 
-    <!-- ════════════════ EDUCATION ════════════════ -->
-    <div class="tab-panel active" id="tab-education">
-      <div class="sub-header">
-        <h2>Academic Background</h2>
-        <p>My educational journey — including academic achievements and leadership roles held along the way.</p>
+  <div class="controls-bar">
+    <div class="control-row">
+      <span class="control-label">Filter</span>
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="healthcare">Healthcare</button>
+      <button class="filter-btn" data-filter="tech">Tech & Design</button>
+      <button class="filter-btn" data-filter="writing">Writing</button>
+      <button class="filter-btn" data-filter="education">Education</button>
+      <button class="filter-btn" data-filter="ongoing">Ongoing</button>
+    </div>
+    <div class="control-row">
+      <span class="control-label">Sort</span>
+      <button class="sort-btn active" data-sort="date-desc">Latest first <span class="sort-icon">↓</span></button>
+      <button class="sort-btn" data-sort="date-asc">Oldest first <span class="sort-icon">↑</span></button>
+      <button class="sort-btn" data-sort="alpha">A → Z <span class="sort-icon">↓</span></button>
+    </div>
+  </div>
+
+  <hr class="controls-separator"/>
+
+  <div class="cert-grid">
+
+    <div class="cert-card" data-category="ongoing" data-date="99999999" data-title="AI in Healthcare Specialisation">
+      <div class="cert-card-top">
+        <span class="cert-badge in-progress">Ongoing</span>
       </div>
-
-      <div class="timeline">
-
-        <!-- NUS -->
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <div class="card-top">
-              <div>
-                <div class="card-org">National University of Singapore</div>
-                <div class="card-title">Bachelor of Engineering — Biomedical Engineering</div>
-              </div>
-              <span class="card-date">Aug 2025 – Present</span>
-            </div>
-            <div class="card-location">📍 Singapore</div>
-            <div class="card-body">
-              <p>Currently pursuing a degree at one of Asia's leading universities, exploring the intersection of engineering and healthcare with a focus on meaningful innovation.</p>
-            </div>
-
-            <div style="margin-top: 18px;">
-              <div class="card-org" style="margin-bottom: 12px;">🏅 Leadership &amp; Co-Curricular</div>
-              <div class="leadership-grid">
-                <div class="leadership-item">
-                  <div class="role">Fundraising Executive</div>
-                  <div class="org">NUS Biomedical Engineering Club (BME) · 2025 – Present</div>
-                </div>
-                <div class="leadership-item">
-                  <div class="role">Head of Marketing &amp; Logistics</div>
-                  <div class="org">NUS Community Service Club — Project Ethelontêr XXI · 2025</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- TP -->
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <div class="card-top">
-              <div>
-                <div class="card-org">Temasek Polytechnic</div>
-                <div class="card-title">Diploma in Biomedical Engineering</div>
-              </div>
-              <span class="card-date">Feb 2021 – Apr 2024</span>
-            </div>
-            <div class="card-location">📍 Singapore</div>
-            <div class="card-body">
-              <p>Graduated with a GPA of 3.88/4.0 with a strong foundation in biomedical engineering, complemented by active involvement across clubs, committees, and international exchange programmes.</p>
-            </div>
-
-            <div>
-              <span class="award-badge">🏆 ENGenius Award 2024</span>
-              <span class="award-badge">🏅 Director's List 2022/2023</span>
-              <span class="award-badge">🏅 Director's List 2021/2022</span>
-              <span class="award-badge">🎓 GPA 3.88 / 4.0</span>
-            </div>
-
-            <div style="margin-top: 20px;">
-              <div class="card-org" style="margin-bottom: 12px;">🏅 Leadership &amp; Co-Curricular</div>
-              <div class="leadership-grid">
-                <div class="leadership-item">
-                  <div class="role">Quartermaster</div>
-                  <div class="org">Global Ambassadors Main Committee · 2023–2024</div>
-                </div>
-                <div class="leadership-item">
-                  <div class="role">Sub-Committee Member</div>
-                  <div class="org">Global Ambassadors · 2022–2023</div>
-                </div>
-                <div class="leadership-item">
-                  <div class="role">Sub-Committee Member</div>
-                  <div class="org">BioEngines Club · 2022–2023</div>
-                </div>
-                <div class="leadership-item">
-                  <div class="role">WorldSkills Finalist Trainee</div>
-                  <div class="org">Mobile Robotics · 2022</div>
-                </div>
-                <div class="leadership-item">
-                  <div class="role">Sports Representative</div>
-                  <div class="org">Temasek Polytechnic · 2022</div>
-                </div>
-                <div class="leadership-item">
-                  <div class="role">Assistant Class Representative</div>
-                  <div class="org">Temasek Polytechnic · 2021</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
+      <div class="cert-body">
+        <h3>AI in Healthcare Specialisation</h3>
+        <div class="cert-issuer">Stanford University</div>
+      </div>
+      <div class="cert-meta">
+        <div class="cert-meta-item">In Progress</div>
+      </div>
+      <div class="cert-tags">
+        <span class="cert-tag">Artificial Intelligence</span>
+        <span class="cert-tag">Healthcare</span>
+        <span class="cert-tag">Machine Learning</span>
       </div>
     </div>
 
-    <!-- ════════════════ EXPERIENCE ════════════════ -->
-    <div class="tab-panel" id="tab-experience">
-      <div class="sub-header">
-        <h2>Work Experience</h2>
-        <p>Internships and roles where I've applied my skills in the real world.</p>
+    <div class="cert-card" data-category="writing" data-date="20260101" data-title="Writing in the Sciences">
+      <div class="cert-card-top">
+        <span class="cert-badge verified">Verified</span>
       </div>
-
-      <div class="timeline">
-
-        <!-- WSA Internship -->
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <div class="card-top">
-              <div>
-                <div class="card-org">WSA · Internship</div>
-                <div class="card-title">Smart Lean Manufacturing Intern</div>
-              </div>
-              <span class="card-date">May – Jul 2026</span>
-            </div>
-            <div class="card-location">📍 Singapore · On-site</div>
-            <div class="card-body">
-              <p>Incoming intern at WSA, a market leader in the hearing aid industry committed to expanding access to hearing care globally. Working within the Smart Lean Programme to drive operational excellence in medical device manufacturing.</p>
-
-              <p><strong style="color:var(--brown);">Responsibilities</strong></p>
-              <ul class="card-list">
-                <li>Collaborate with engineers to conduct production shopfloor studies and identify improvement opportunities.</li>
-                <li>Apply and implement industry best practices to improve shopfloor operations.</li>
-                <li>Analyse internal data to generate insights that support process improvement initiatives.</li>
-                <li>Develop process expertise in medical device manufacturing environments.</li>
-                <li>Contribute to a culture of continuous improvement and support ad-hoc tasks as assigned.</li>
-              </ul>
-            </div>
-            <div class="card-tags">
-              <span class="card-tag">Lean Manufacturing</span>
-              <span class="card-tag">Process Improvement</span>
-              <span class="card-tag">Data Analysis</span>
-              <span class="card-tag">Medical Devices</span>
-              <span class="card-tag">Operational Excellence</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- KNIT Internship -->
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <div class="card-top">
-              <div>
-                <div class="card-org">Kumamoto National College of Technology · Internship</div>
-                <div class="card-title">Assistive Technology Research &amp; Development Intern</div>
-              </div>
-              <span class="card-date">Apr – Aug 2023</span>
-            </div>
-            <div class="card-location">📍 Koshi, Kumamoto, Japan · On-site</div>
-            <div class="card-body">
-              <p>Interned at the Department of Control and Information Systems Engineering under Professor Ohtsuka Hirofumi, leading individual R&D projects centred on AI-powered assistive technology using MediaPipe and Python.</p>
-
-              <p><strong style="color:var(--brown);">Project 1 — Hand Gesture Recognition</strong></p>
-              <ul class="card-list">
-                <li>Investigated recognition of sign language hand gestures using MediaPipe Hands — an AI hand recognition tool.</li>
-                <li>Developed in Python 3, leveraging machine learning inference in real time.</li>
-              </ul>
-
-              <p><strong style="color:var(--brown);">Project 2 — Head Communication System</strong></p>
-              <ul class="card-list">
-                <li>Built a system to support individuals with verbal and/or physical disabilities to communicate using head position tracking.</li>
-                <li>Utilised OpenCV for computer vision and MediaPipe for AI/ML inference to detect and map head movements to inputs.</li>
-              </ul>
-
-              <p>Awarded the <strong style="color:var(--rust);">JASSO (Japan Student Services Organisation) Scholarship</strong> in recognition of academic commitment and potential.</p>
-            </div>
-            <div class="card-tags">
-              <span class="card-tag">Python</span>
-              <span class="card-tag">MediaPipe</span>
-              <span class="card-tag">OpenCV</span>
-              <span class="card-tag">Computer Vision</span>
-              <span class="card-tag">AI / ML</span>
-              <span class="card-tag">Assistive Technology</span>
-              <span class="card-tag">NumPy</span>
-              <span class="card-tag">PyAutoGUI</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- WorldSkills -->
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <div class="card-top">
-              <div>
-                <div class="card-org">Temasek Polytechnic</div>
-                <div class="card-title">WorldSkills Singapore — Mobile Robotics Finalist Trainee</div>
-              </div>
-              <span class="card-date">Oct 2021 – Feb 2023</span>
-            </div>
-            <div class="card-location">📍 Singapore · On-site</div>
-            <div class="card-body">
-              <p>Selected as one of six finalist trainees at Temasek Polytechnic for WorldSkills Singapore Mobile Robotics — a competitive programme focused on designing, building, and programming mobile robots for complex tasks.</p>
-
-              <p><strong style="color:var(--brown);">Robot Development &amp; Movement</strong></p>
-              <ul class="card-list">
-                <li>Built robots using the Studica Robotics Building System (hardware + controllers).</li>
-                <li>Programmed precise autonomous navigation and task execution in Java.</li>
-              </ul>
-
-              <p><strong style="color:var(--brown);">Vision &amp; Sensor Integration</strong></p>
-              <ul class="card-list">
-                <li>Processed vision and sensor data on a Raspberry Pi using Python and OpenCV for object detection.</li>
-                <li>Implemented YOLO AI for advanced object recognition and intelligent sensor filtering.</li>
-              </ul>
-            </div>
-            <div class="card-tags">
-              <span class="card-tag">Java</span>
-              <span class="card-tag">Python</span>
-              <span class="card-tag">OpenCV</span>
-              <span class="card-tag">YOLO AI</span>
-              <span class="card-tag">Raspberry Pi</span>
-              <span class="card-tag">Robotics</span>
-              <span class="card-tag">Autonomous Systems</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Freelance Artist -->
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <div class="card-top">
-              <div>
-                <div class="card-org">Freelance · Self-Employed</div>
-                <div class="card-title">Freelance Artist</div>
-              </div>
-              <span class="card-date">Nov 2020 – Feb 2023</span>
-            </div>
-            <div class="card-location">📍 Singapore</div>
-            <div class="card-body">
-              <p>Created original commissioned artwork — primarily portraits, pets, and custom pieces — using graphite, pen, and digital media. Managed the full client lifecycle independently.</p>
-              <ul class="card-list">
-                <li>Handled client commissions from concept to final delivery.</li>
-                <li>Promoted work through personal networks, generating sales and building lasting client relationships.</li>
-                <li>Coordinated order tracking, client communications, and project deadlines independently.</li>
-              </ul>
-            </div>
-            <div class="card-tags">
-              <span class="card-tag">Illustration</span>
-              <span class="card-tag">Digital Art</span>
-              <span class="card-tag">Client Management</span>
-              <span class="card-tag">Freelancing</span>
-            </div>
-          </div>
-        </div>
-
+      <div class="cert-body">
+        <h3>Writing in the Sciences</h3>
+        <div class="cert-issuer">Stanford University</div>
+      </div>
+      <div class="cert-meta">
+        <div class="cert-meta-item">Jan 2026</div>
+      </div>
+      <div class="cert-desc">
+        Covered key principles of scientific writing, including structuring research papers, improving clarity and conciseness, and effectively communicating scientific information to diverse audiences.
+      </div>
+      <div class="cert-tags">
+        <span class="cert-tag">Scientific Writing</span>
+      </div>
+      <div class="cert-footer">
+        <span class="cert-id">RN3JUWKPWIQ5</span>
+        <a href="https://coursera.org/share/8059adc74d04eb3252131840e149d179" class="cert-link">View credential →</a>
       </div>
     </div>
 
-    <!-- ════════════════ VOLUNTEERING ════════════════ -->
-    <div class="tab-panel" id="tab-volunteering">
-      <div class="sub-header">
-        <h2>Volunteering &amp; Community</h2>
-        <p>Giving back has always been a big part of who I am — from eldercare and inclusive events to student programmes.</p>
+    <div class="cert-card" data-category="healthcare" data-date="20251201" data-title="Coding and Medical Necessity">
+      <div class="cert-card-top">
+        <span class="cert-badge verified">Verified</span>
       </div>
-
-      <div class="vol-grid">
-
-        <div class="vol-card">
-          <div class="vol-card-icon">🧠</div>
-          <div class="card-org">NUS Community Service Club</div>
-          <div class="card-title">Head of Logistics &amp; Marketing — Project Ethelontêr XXI</div>
-          <div class="card-date" style="display:inline-block;margin-bottom:10px;">Jul 2025</div>
-          <div class="card-body">
-            <p>Facilitated icebreaker games and clay sculpting activities with beneficiaries at MINDS (Movement for the Intellectually Disabled of Singapore) as part of a freshmen volunteerism orientation camp. Coordinated logistics, set up activity stations, and supported inclusive participation.</p>
-          </div>
-        </div>
-
-        <div class="vol-card">
-          <div class="vol-card-icon">🥟</div>
-          <div class="card-org">Non-Profit Organisation</div>
-          <div class="card-title">Volunteer — Dumpling Festival Distribution</div>
-          <div class="card-date" style="display:inline-block;margin-bottom:10px;">May 2025</div>
-          <div class="card-body">
-            <p>Supported the food distribution process for elderly attendees throughout the Dumpling Festival event.</p>
-          </div>
-        </div>
-
-        <div class="vol-card">
-          <div class="vol-card-icon">🗂️</div>
-          <div class="card-org">Temasek Polytechnic</div>
-          <div class="card-title">Organizer — Interest Group Roadshow (ENG) 2023</div>
-          <div class="card-date" style="display:inline-block;margin-bottom:10px;">Oct 2023</div>
-          <div class="card-body">
-            <p>Set roadshow goals, created presentation slides, oversaw event setup and registration, and gathered attendee feedback. Also delivered a talk as Student Ambassador on Overseas Student Internship opportunities.</p>
-          </div>
-        </div>
-
-        <div class="vol-card">
-          <div class="vol-card-icon">🇯🇵</div>
-          <div class="card-org">Temasek Polytechnic</div>
-          <div class="card-title">Student Ambassador — TP-ENG × KNIT Exchange Programme</div>
-          <div class="card-date" style="display:inline-block;margin-bottom:10px;">Sep 2023</div>
-          <div class="card-body">
-            <p>Engaged with visiting Japanese students through language and cultural activities, collaborative projects, and industrial visits. Gave a tour of Singapore and promoted cross-cultural exchange.</p>
-          </div>
-        </div>
-
-        <div class="vol-card">
-          <div class="vol-card-icon">🍱</div>
-          <div class="card-org">AMKSS Social Move Limited</div>
-          <div class="card-title">Volunteer — Appreciation Day for Unsung Heroes</div>
-          <div class="card-date" style="display:inline-block;margin-bottom:10px;">Aug 2023</div>
-          <div class="card-body">
-            <p>Supported food distribution for elderly attendees at an appreciation event recognising everyday community heroes.</p>
-          </div>
-        </div>
-
-        <div class="vol-card">
-          <div class="vol-card-icon">🌙</div>
-          <div class="card-org">Hao Ren Hao Shi (好人好事)</div>
-          <div class="card-title">Student Volunteer — Hari Raya Goody Bag Packing</div>
-          <div class="card-date" style="display:inline-block;margin-bottom:10px;">Apr 2023</div>
-          <div class="card-body">
-            <p>Packed 1,000 goodie bags for migrant workers as part of the Hari Raya Dormitory Distribution Project in collaboration with TP and HRHS.</p>
-          </div>
-        </div>
-
-        <div class="vol-card">
-          <div class="vol-card-icon">📦</div>
-          <div class="card-org">Hao Ren Hao Shi (好人好事)</div>
-          <div class="card-title">Student Volunteer — Care Pack Distribution</div>
-          <div class="card-date" style="display:inline-block;margin-bottom:10px;">Apr 2023</div>
-          <div class="card-body">
-            <p>Unpacked and distributed goods to residents in Tampines as part of the HRHS × TN-CCC × TP ENG Care Pack Distribution event.</p>
-          </div>
-        </div>
-
-        <div class="vol-card">
-          <div class="vol-card-icon">🌏</div>
-          <div class="card-org">Temasek Polytechnic</div>
-          <div class="card-title">Student Ambassador — Waseda-Temasek Exchange</div>
-          <div class="card-date" style="display:inline-block;margin-bottom:10px;">Jun &amp; Dec 2022</div>
-          <div class="card-body">
-            <p>Introduced Japanese students to Singapore's places of interest, promoted local culture, and helped broaden their global perspectives across two exchange sessions.</p>
-          </div>
-        </div>
-
-        <div class="vol-card">
-          <div class="vol-card-icon">💊</div>
-          <div class="card-org">NKF Singapore</div>
-          <div class="card-title">Student Program Coordinator — Project Nephron</div>
-          <div class="card-date" style="display:inline-block;margin-bottom:10px;">Dec 2022</div>
-          <div class="card-body">
-            <p>Led student engagement for a service-learning project and prepared medical packs essential for dialysis treatment needs as part of a class community initiative.</p>
-          </div>
-        </div>
-
-        <div class="vol-card">
-          <div class="vol-card-icon">🗳️</div>
-          <div class="card-org">People's Action Party</div>
-          <div class="card-title">Meet-the-People Session Volunteer</div>
-          <div class="card-date" style="display:inline-block;margin-bottom:10px;">Dec 2022</div>
-          <div class="card-body">
-            <p>Assisted at Meet-the-People sessions at Tampines North alongside Mr Baey Yam Keng, supporting residents with enquiries and administrative matters.</p>
-          </div>
-        </div>
-
-        <div class="vol-card">
-          <div class="vol-card-icon">🏗️</div>
-          <div class="card-org">Temasek Polytechnic</div>
-          <div class="card-title">Event Helper — TP ENG × Bart Open House Project</div>
-          <div class="card-date" style="display:inline-block;margin-bottom:10px;">Nov 2022</div>
-          <div class="card-body">
-            <p>Contributed to building a hands-on 3-metre-tall cardboard 3D sculpture for TP Open House 2023, learning 3D design tools like Blender and Pepakura Designer in the process.</p>
-          </div>
-        </div>
-
-        <div class="vol-card">
-          <div class="vol-card-icon">🏸</div>
-          <div class="card-org">Temasek Polytechnic</div>
-          <div class="card-title">Event Assistant — Annual BME Course Chair Cup 2022</div>
-          <div class="card-date" style="display:inline-block;margin-bottom:10px;">Nov 2022</div>
-          <div class="card-body">
-            <p>Managed logistics for the sports event — set up equipment, tracked inventory quality throughout the day, and monitored players during breaks.</p>
-          </div>
-        </div>
-
-        <div class="vol-card">
-          <div class="vol-card-icon">📚</div>
-          <div class="card-org">Temasek Polytechnic</div>
-          <div class="card-title">Peer Tutor — Circuit Analysis</div>
-          <div class="card-date" style="display:inline-block;margin-bottom:10px;">Apr – Sep 2022</div>
-          <div class="card-body">
-            <p>Supported Year 1 peers with learning difficulties in Circuit Analysis. Reinforced personal engineering fundamentals while building confidence, communication, and teaching skills.</p>
-          </div>
-        </div>
-
-        <div class="vol-card">
-          <div class="vol-card-icon">🩺</div>
-          <div class="card-org">Ministry of Health (Singapore)</div>
-          <div class="card-title">Student Volunteer — Project Silver Screen 2022</div>
-          <div class="card-date" style="display:inline-block;margin-bottom:10px;">May 2022</div>
-          <div class="card-body">
-            <p>Supported a nationwide functional screening programme for Singaporeans aged 60+ in collaboration with Temasek Foundation — duties included ushering, crowd management, and admin support.</p>
-          </div>
-        </div>
-
-        <div class="vol-card">
-          <div class="vol-card-icon">🎉</div>
-          <div class="card-org">Temasek Polytechnic</div>
-          <div class="card-title">School Mentor — Freshmen Orientation 2022</div>
-          <div class="card-date" style="display:inline-block;margin-bottom:10px;">Apr 2022</div>
-          <div class="card-body">
-            <p>Ushered freshmen to their venues and assisted with technical onboarding issues during orientation, helping new students settle in smoothly.</p>
-          </div>
-        </div>
-
-        <div class="vol-card">
-          <div class="vol-card-icon">💛</div>
-          <div class="card-org">APSN Tanglin School</div>
-          <div class="card-title">Student Volunteer — Youth Day Celebration</div>
-          <div class="card-date" style="display:inline-block;margin-bottom:10px;">Jul 2019</div>
-          <div class="card-body">
-            <p>Volunteered at the Youth Day celebration event at APSN Tanglin School, engaging with students with special needs in a festive and inclusive setting.</p>
-          </div>
-        </div>
-
-        <div class="vol-card">
-          <div class="vol-card-icon">🕊️</div>
-          <div class="card-org">Singapore Soka Association</div>
-          <div class="card-title">Youth Advocate — Youth Summit "Choose Hope"</div>
-          <div class="card-date" style="display:inline-block;margin-bottom:10px;">Jul – Aug 2018</div>
-          <div class="card-body">
-            <p>Pledged as a youth advocate to promote harmonious coexistence of all races and religions in Singapore, contributing to a summit themed "Embracing Diversity, Empowering Lives."</p>
-          </div>
-        </div>
-
+      <div class="cert-body">
+        <h3>Coding and Medical Necessity</h3>
+        <div class="cert-issuer">AAPC</div>
+      </div>
+      <div class="cert-meta">
+        <div class="cert-meta-item">Dec 2025</div>
+      </div>
+      <div class="cert-desc">
+        Covered the principles of medical coding and medical necessity, focusing on accurate documentation, proper code selection, and meeting payer requirements to support compliant claims and reimbursement.
+      </div>
+      <div class="cert-tags">
+        <span class="cert-tag">Medical Coding</span>
+        <span class="cert-tag">Clinical Documentation</span>
+      </div>
+      <div class="cert-footer">
+        <span class="cert-id">K5Q1KW2FR764</span>
+        <a href="https://www.coursera.org/account/accomplishments/verify/K5Q1KW2FR764" class="cert-link">View credential →</a>
       </div>
     </div>
 
-  </div><!-- /content-area -->
+    <div class="cert-card" data-category="tech" data-date="20251201" data-title="Foundations of User Experience (UX) Design">
+      <div class="cert-card-top">
+        <span class="cert-badge verified">Verified</span>
+      </div>
+      <div class="cert-body">
+        <h3>Foundations of User Experience (UX) Design</h3>
+        <div class="cert-issuer">Google</div>
+      </div>
+      <div class="cert-meta">
+        <div class="cert-meta-item">Dec 2025</div>
+      </div>
+      <div class="cert-desc">
+        Covered the fundamentals of user experience (UX) design, including user research, interaction design, prototyping, and creating intuitive, user-centered digital experiences.
+      </div>
+      <div class="cert-tags">
+        <span class="cert-tag">UX Design</span>
+        <span class="cert-tag">Design Thinking</span>
+      </div>
+      <div class="cert-footer">
+        <span class="cert-id">33MZBMOOGUXT</span>
+        <a href="https://www.coursera.org/account/accomplishments/verify/33MZBMOOGUXT" class="cert-link">View credential →</a>
+      </div>
+    </div>
+
+    <div class="cert-card" data-category="healthcare" data-date="20251001" data-title="Audible Contrast Threshold (ACT) An Introduction">
+      <div class="cert-card-top">
+        <span class="cert-badge verified">Verified</span>
+      </div>
+      <div class="cert-body">
+        <h3>Audible Contrast Threshold (ACT) — An Introduction</h3>
+        <div class="cert-issuer">Interacoustics A/S · Interacoustics Academy</div>
+      </div>
+      <div class="cert-meta">
+        <div class="cert-meta-item">Oct 2025</div>
+      </div>
+      <div class="cert-desc">
+        Covered the purpose and principles of the ACT test, its role in assessing patients' ability to hear in noise, and its language-independent design. Learned to perform, interpret, and apply ACT values to optimize hearing aid programming and patient counselling in noisy environments.
+      </div>
+      <div class="cert-tags">
+        <span class="cert-tag">Audiology</span>
+        <span class="cert-tag">Hearing Aids</span>
+        <span class="cert-tag">Clinical Testing</span>
+      </div>
+      <div class="cert-footer">
+        <a href="https://drive.google.com/file/d/1jKHvwB9mkTUjR_H81G-_KZMPRY3QV4dO/view?usp=sharing" class="cert-link">View Certificate →</a>
+      </div>
+    </div>
+
+    <div class="cert-card" data-category="healthcare" data-date="20251001" data-title="Getting Started in Videonystagmography (VNG)">
+      <div class="cert-card-top">
+        <span class="cert-badge verified">Verified</span>
+      </div>
+      <div class="cert-body">
+        <h3>Getting Started in Videonystagmography (VNG)</h3>
+        <div class="cert-issuer">Interacoustics A/S · Interacoustics Academy</div>
+      </div>
+      <div class="cert-meta">
+        <div class="cert-meta-item">Oct 2025</div>
+      </div>
+      <div class="cert-desc">
+        Covered patient interaction, use of VNG goggles, key subtests, and basic interpretation of vestibular assessment results.
+      </div>
+      <div class="cert-tags">
+        <span class="cert-tag">VNG</span>
+        <span class="cert-tag">Vestibular Assessment</span>
+        <span class="cert-tag">Diagnostics</span>
+      </div>
+      <div class="cert-footer">
+        <a href="https://drive.google.com/file/d/1AT3EM9kizniNTFUZSxHSuukK2_p4gMu4/view?usp=sharing" class="cert-link">View Certificate →</a>
+      </div>
+    </div>
+
+    <div class="cert-card" data-category="healthcare" data-date="20250901" data-title="Motor Neurone Disease MOOC 2025">
+      <div class="cert-card-top">
+        <span class="cert-badge verified">Verified</span>
+      </div>
+      <div class="cert-body">
+        <h3>Motor Neurone Disease MOOC 2025</h3>
+        <div class="cert-issuer">Wicking Dementia Research & Education Centre</div>
+      </div>
+      <div class="cert-meta">
+        <div class="cert-meta-item">Sep 2025</div>
+      </div>
+      <div class="cert-desc">
+        Completed an in-depth course covering MND epidemiology, genetics, risk factors, nervous and motor system changes, diagnostic pathways, multidisciplinary care, and strategies to support daily living and quality of life.
+      </div>
+      <div class="cert-tags">
+        <span class="cert-tag">Neurodegenerative Disease</span>
+        <span class="cert-tag">Clinical Care</span>
+        <span class="cert-tag">Multidisciplinary</span>
+      </div>
+      <div class="cert-footer">
+        <a href="https://drive.google.com/file/d/1-MVwPQoHhRb--p1O5iDRNul7dM9HgoIn/view?usp=sharing" class="cert-link">View Certificate →</a>
+      </div>
+    </div>
+
+    <div class="cert-card" data-category="education" data-date="20240501" data-title="Diploma in Biomedical Engineering">
+      <div class="cert-card-top">
+        <span class="cert-badge education">Education</span>
+      </div>
+      <div class="cert-body">
+        <h3>Diploma in Biomedical Engineering</h3>
+        <div class="cert-issuer">Temasek Polytechnic</div>
+      </div>
+      <div class="cert-meta">
+        <div class="cert-meta-item">May 2024</div>
+      </div>
+      <div class="cert-desc">
+        Covered core concepts in biomedical engineering, including medical instrumentation, biomaterials, and healthcare technology, with hands-on experience in designing and analyzing biomedical systems.
+      </div>
+      <div class="cert-tags">
+        <span class="cert-tag">Biomedical Engineering</span>
+        <span class="cert-tag">Medical Devices</span>
+        <span class="cert-tag">R&D</span>
+      </div>
+      <div class="cert-footer">
+        <a href="https://drive.google.com/file/d/12VqsGBQ74oaf4R1-hdCqMNTLpjxqQ5Ed/view?usp=sharing" class="cert-link">View Diploma →</a>
+      </div>
+    </div>
+
+    <div class="cert-card" data-category="education" data-date="20231101" data-title="Certificate in University Preparatory Programme Mathematics">
+      <div class="cert-card-top">
+        <span class="cert-badge verified">Verified</span>
+      </div>
+      <div class="cert-body">
+        <h3>Certificate in University Preparatory Programme Mathematics</h3>
+        <div class="cert-issuer">Temasek Polytechnic</div>
+      </div>
+      <div class="cert-meta">
+        <div class="cert-meta-item">Nov 2023</div>
+      </div>
+      <div class="cert-desc">
+        Covered fundamental and advanced mathematics concepts, including algebra, calculus, and problem-solving skills, to prepare for university-level STEM coursework.
+      </div>
+      <div class="cert-tags">
+        <span class="cert-tag">Mathematics</span>
+      </div>
+      <div class="cert-footer">
+        <span class="cert-id">TP-TSA-2023-1690</span>
+        <a href="https://acrobat.adobe.com/link/track?uri=urn:aaid:scds:US:4b772cdb-8245-3d3e-afb1-3ba805224a54" target="_blank" class="cert-link">View credential →</a>
+      </div>
+    </div>
+
+    <div class="cert-card" data-category="tech" data-date="20220401" data-title="Google Analytics for Beginners">
+      <div class="cert-card-top">
+        <span class="cert-badge expired">Expired</span>
+      </div>
+      <div class="cert-body">
+        <h3>Google Analytics for Beginners</h3>
+        <div class="cert-issuer">Google</div>
+      </div>
+      <div class="cert-meta">
+        <div class="cert-meta-item">Apr 2022 · Expired Apr 2025</div>
+      </div>
+      <div class="cert-desc">
+        Covered the fundamentals of Google Analytics, including setting up accounts, tracking website data, analyzing user behavior, and using insights to improve digital marketing strategies.
+      </div>
+      <div class="cert-tags">
+        <span class="cert-tag">Google Analytics</span>
+        <span class="cert-tag">Data Analysis</span>
+      </div>
+      <div class="cert-footer">
+        <a href="https://drive.google.com/file/d/1aufwrsGWvXrzt9L6TLPQteUCESEPpwkG/view?usp=sharing" class="cert-link">View Certificate →</a>
+      </div>
+    </div>
+
+  </div>
 
   <footer>
-    <a href="assets/Eva_Tan_Resume.pdf" download="Eva_Tan_Resume.pdf" target="_blank" rel="noopener" class="resume-btn">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M8 1v9M5 7l3 3 3-3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M2 11v2a1 1 0 001 1h10a1 1 0 001-1v-2" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
-      </svg>
-      View my Resume
-    </a>
-    <p>Committed to excellence and continuous improvement ☀️</p>
+    <p>Made with curiosity and sunshine ☀️</p>
   </footer>
 
   <script>
-    // Tab switching
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabPanels = document.querySelectorAll('.tab-panel');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const sortBtns   = document.querySelectorAll('.sort-btn');
+    const grid       = document.querySelector('.cert-grid');
 
-    tabBtns.forEach(btn => {
+    let currentFilter = 'all';
+    let currentSort   = 'date-desc';
+
+    function applyFilterAndSort() {
+      const allCards = Array.from(grid.querySelectorAll('.cert-card'));
+
+      // Filter visibility
+      allCards.forEach(card => {
+        const match = currentFilter === 'all' || card.dataset.category === currentFilter;
+        card.classList.toggle('hidden', !match);
+      });
+
+      // Sort visible cards
+      const visible = allCards.filter(c => !c.classList.contains('hidden'));
+      visible.sort((a, b) => {
+        if (currentSort === 'date-desc') return Number(b.dataset.date) - Number(a.dataset.date);
+        if (currentSort === 'date-asc')  return Number(a.dataset.date) - Number(b.dataset.date);
+        if (currentSort === 'alpha')     return a.dataset.title.localeCompare(b.dataset.title);
+      });
+
+      // Re-append in sorted order (hidden ones stay at end, out of flow)
+      visible.forEach(card => grid.appendChild(card));
+    }
+
+    filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        tabBtns.forEach(b => b.classList.remove('active'));
-        tabPanels.forEach(p => p.classList.remove('active'));
+        filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
-        // Re-trigger scroll animations for newly visible items
-        observeItems();
+        currentFilter = btn.dataset.filter;
+        applyFilterAndSort();
       });
     });
 
-    // Scroll-triggered fade-in for timeline items
-    function observeItems() {
-      const items = document.querySelectorAll('.timeline-item:not(.visible)');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, i) => {
-          if (entry.isIntersecting) {
-            setTimeout(() => entry.target.classList.add('visible'), i * 80);
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-      items.forEach(item => observer.observe(item));
-    }
-
-    observeItems();
-
-    // Active nav link
-    document.querySelectorAll('.nav-links a').forEach(a => {
-      if (a.href === window.location.href) a.classList.add('active');
+    sortBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        sortBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentSort = btn.dataset.sort;
+        applyFilterAndSort();
+      });
     });
+
+    // Apply default sort on load
+    applyFilterAndSort();
   </script>
+
 </body>
 </html>
