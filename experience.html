@@ -272,10 +272,23 @@
 
     /* ── Footer ── */
     footer {
-      position: relative; z-index: 1; text-align: center; padding: 32px;
+      position: relative; z-index: 1; text-align: center; padding: 40px 32px;
       font-size: var(--fs-sm); color: var(--muted);
       border-top: 1px solid rgba(244,185,125,0.25);
+      display: flex; flex-direction: column; align-items: center; gap: 20px;
     }
+    .resume-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      text-decoration: none;
+      background: var(--tangerine); color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: var(--fs-sm); font-weight: 500;
+      padding: 13px 28px; border-radius: 100px;
+      box-shadow: 0 4px 20px rgba(232,135,58,0.32);
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .resume-btn:hover { background: var(--rust); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(196,94,26,0.38); }
+    .resume-btn svg { flex-shrink: 0; }
 
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
@@ -305,10 +318,10 @@
     <a href="index.html" class="nav-logo">✦ Eva's Portfolio</a>
     <div class="nav-links">
       <a href="index.html">Home</a>
-      <a href="experience.html" class="active">Experience</a>
       <a href="projects.html">Projects</a>
       <a href="achievements.html">Achievements</a>
       <a href="certifications.html">Certifications</a>
+      <a href="experience.html" class="active">Experience</a>
       <a href="index.html#contact">Contact</a>
     </div>
   </nav>
@@ -393,10 +406,10 @@
             </div>
 
             <div>
-              <span class="award-badge">🎓 GPA 3.88 / 4.0</span>
               <span class="award-badge">🏆 ENGenius Award 2024</span>
               <span class="award-badge">🏅 Director's List 2022/2023</span>
               <span class="award-badge">🏅 Director's List 2021/2022</span>
+              <span class="award-badge">🎓 GPA 3.88 / 4.0</span>
             </div>
 
             <div style="margin-top: 20px;">
@@ -407,12 +420,8 @@
                   <div class="org">Global Ambassadors Main Committee · 2023–2024</div>
                 </div>
                 <div class="leadership-item">
-                  <div class="role">Peer Mentor</div>
-                  <div class="org">Global Ambassadors · 2022–2023</div>
-                </div>
-                <div class="leadership-item">
                   <div class="role">Sub-Committee Member</div>
-                  <div class="org">Temasek Polytechnic · 2022–2023</div>
+                  <div class="org">Global Ambassadors · 2022–2023</div>
                 </div>
                 <div class="leadership-item">
                   <div class="role">Sub-Committee Member</div>
@@ -446,6 +455,40 @@
       </div>
 
       <div class="timeline">
+
+        <!-- WSA Internship -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="card-top">
+              <div>
+                <div class="card-org">WSA · Internship</div>
+                <div class="card-title">Smart Lean Manufacturing Intern</div>
+              </div>
+              <span class="card-date">May – Jul 2026</span>
+            </div>
+            <div class="card-location">📍 Singapore · On-site</div>
+            <div class="card-body">
+              <p>Incoming intern at WSA, a market leader in the hearing aid industry committed to expanding access to hearing care globally. Working within the Smart Lean Programme to drive operational excellence in medical device manufacturing.</p>
+
+              <p><strong style="color:var(--brown);">Responsibilities</strong></p>
+              <ul class="card-list">
+                <li>Collaborate with engineers to conduct production shopfloor studies and identify improvement opportunities.</li>
+                <li>Apply and implement industry best practices to improve shopfloor operations.</li>
+                <li>Analyse internal data to generate insights that support process improvement initiatives.</li>
+                <li>Develop process expertise in medical device manufacturing environments.</li>
+                <li>Contribute to a culture of continuous improvement and support ad-hoc tasks as assigned.</li>
+              </ul>
+            </div>
+            <div class="card-tags">
+              <span class="card-tag">Lean Manufacturing</span>
+              <span class="card-tag">Process Improvement</span>
+              <span class="card-tag">Data Analysis</span>
+              <span class="card-tag">Medical Devices</span>
+              <span class="card-tag">Operational Excellence</span>
+            </div>
+          </div>
+        </div>
 
         <!-- KNIT Internship -->
         <div class="timeline-item">
@@ -745,7 +788,14 @@
   </div><!-- /content-area -->
 
   <footer>
-    <p>Made with curiosity and sunshine ☀️</p>
+    <a href="Eva_Tan_Resume.pdf" download="Eva_Tan_Resume.pdf" class="resume-btn">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 1v9M5 7l3 3 3-3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M2 11v2a1 1 0 001 1h10a1 1 0 001-1v-2" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      Download Resume
+    </a>
+    <p>Made with curiosity and sunshine</p>
   </footer>
 
   <script>
