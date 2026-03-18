@@ -18,14 +18,13 @@
       --text:      #3b2009;
       --muted:     #9a6a3f;
  
-      /* ── Typography scale ── */
-      --fs-base:        1rem;       /* 20px body copy */
-      --fs-sm:          0.9rem;     /* secondary text, footer */
-      --fs-xs:          0.82rem;    /* tags, pills, small labels */
-      --fs-xxs:         0.78rem;    /* ALL section-labels / card-tags / nav links */
-      --fs-label-ls:    2.5px;      /* unified letter-spacing for all labels */
-      --fs-lg:          1.05rem;    /* lead paragraphs */
-      --fs-nav-logo:    1.25rem;    /* nav brand */
+      --fs-base:        1rem;
+      --fs-sm:          0.9rem;
+      --fs-xs:          0.82rem;
+      --fs-xxs:         0.78rem;
+      --fs-label-ls:    2.5px;
+      --fs-lg:          1.05rem;
+      --fs-nav-logo:    1.25rem;
       --fs-h-hero:      clamp(3rem, 7vw, 5.5rem);
       --fs-h-section:   clamp(2rem, 4vw, 3rem);
     }
@@ -148,7 +147,51 @@
       padding: 7px 18px; border-radius: 100px; transition: background 0.2s;
     }
     .skill-pill:hover { background: rgba(232,135,58,0.22); }
- 
+
+    /* ── Experience callout ── */
+    .exp-callout {
+      position: relative; z-index: 1;
+      margin: 0 80px 28px;
+      border-radius: 24px;
+      padding: 48px 56px;
+      display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap;
+      background: rgba(92,51,16,0.04);
+      border: 1px solid rgba(196,94,26,0.18);
+      overflow: hidden;
+    }
+    .exp-callout::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        -55deg,
+        transparent,
+        transparent 18px,
+        rgba(232,135,58,0.04) 18px,
+        rgba(232,135,58,0.04) 19px
+      );
+      pointer-events: none;
+    }
+    .exp-callout-text { position: relative; z-index: 1; }
+    .exp-callout-text h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--brown); margin-bottom: 10px; }
+    .exp-callout-text p { font-size: var(--fs-base); color: var(--muted); line-height: 1.9; max-width: 440px; }
+    .exp-callout-meta {
+      display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px;
+    }
+    .exp-callout-pill {
+      font-size: var(--fs-xs); color: var(--rust); font-weight: 500;
+      background: rgba(196,94,26,0.08); border: 1px solid rgba(196,94,26,0.2);
+      border-radius: 100px; padding: 4px 14px;
+    }
+    .btn-outline-rust {
+      position: relative; z-index: 1;
+      display: inline-block; text-decoration: none;
+      border: 1.5px solid var(--rust); color: var(--rust);
+      font-size: var(--fs-sm); font-weight: 500; padding: 14px 32px; border-radius: 100px;
+      white-space: nowrap;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+    }
+    .btn-outline-rust:hover { background: var(--rust); color: #fff; transform: translateY(-2px); }
+
     /* ── Blog callout ── */
     .blog-callout {
       position: relative; z-index: 1;
@@ -196,6 +239,7 @@
       .scroll-hint { left: 24px; }
       .section { padding: 60px 24px; }
       .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .exp-callout { margin: 0 24px 20px; padding: 36px 28px; }
       .blog-callout { margin: 0 24px 60px; padding: 36px 28px; }
       .contact-section { padding: 40px 24px; }
       .contact-box { padding: 48px 28px; }
@@ -271,7 +315,22 @@
       </div>
     </div>
   </section>
+
  
+  <div class="exp-callout">
+    <div class="exp-callout-text">
+      <h3>💼 Where I've worked &amp; grown.</h3>
+      <p>From AI research in Japan to lean manufacturing in medtech — a look at the roles, projects, and moments that have shaped how I think and build.</p>
+      <div class="exp-callout-meta">
+        <span class="exp-callout-pill">Internships</span>
+        <span class="exp-callout-pill">Research</span>
+        <span class="exp-callout-pill">Leadership</span>
+        <span class="exp-callout-pill">Volunteering</span>
+      </div>
+    </div>
+    <a href="experience.html" class="btn-outline-rust">View Experience →</a>
+  </div>
+
   <div class="blog-callout">
     <div class="blog-callout-text">
       <h3>✍️ I also write about MedTech.</h3>
